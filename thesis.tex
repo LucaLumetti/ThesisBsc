@@ -1,0 +1,46 @@
+\documentclass[12pt,a4paper,oneside]{book}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+\usepackage{cite}
+\renewcommand{\baselinestretch}{1.5}
+\usepackage[]{frontespizio}
+
+\begin{document}
+
+\begin{frontespizio}
+\Rientro {1.5cm}
+\Margini {1.5cm}{1.5cm}{1.5cm}{1cm}
+\Universita {Modena e Reggio Emilia}
+\Logo [1.5cm]{img/UNIMORE}
+\Facolta {Ingegneria}
+\Corso [Laurea]{Ingegneria Informatica}
+\Annoaccademico {2019-2020}
+\Titoletto {Prova Finale}
+\Titolo {Crittografia}
+\Candidato [118447]{Luca Lumetti}
+\Relatore {Prof. Maurizio Casoni}
+\Correlatore{Dott. Martin Klapez}
+\end{frontespizio}
+
+\newpage
+
+%\begin{flushright}
+%\null\vspace{\stretch{1}}
+CIAO \cite{Spring:2017}
+%\vspace{\stretch{1}}\null
+%\end{flushright}
+
+\tableofcontents
+\listoffigures
+\listoftables
+
+\input{chpt/introduzione.tex}
+\input{chpt/conclusione.tex}
+
+\appendix
+
+\bibliographystyle{plain}
+\bibliography{thesis}
+
+\end{document}
