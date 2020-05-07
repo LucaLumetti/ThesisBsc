@@ -1,0 +1,13 @@
+Gli schemi crittografici a chiave privata (anche detti simmetrici) sono stati i primi schemi ad essere creati e sono tutt'ora molto usati. Sono caratterizzati dalla presenza di una sola chiave che viene utilizzata sia per criptare un messaggio sia per decriptarlo.\\
+Più precisamente, uno schema crittografico a chiave privata è una tupla $(\mathsf{Gen}, \mathsf{Enc}, \mathsf{Dec})$ dove:
+\begin{itemize}
+    \item{\textbf{$\mathsf{Gen}(\cdot)$:} è un algoritmo randomizzato che a fronte di un input $1^{n}$ genera una chiave $k$ tale che $|k| \geq n$. E' quindi definito nel seguente modo: $k \leftarrow \mathsf{Gen}(1^{n})$}. Il parametro $n$ viene detto \emph{parametro di sicurezza}
+    \item{\textbf{$\mathsf{Enc}(\cdot)$:} è un algoritmo polinomiale che puo' essere di tipo deterministico o probabilistico. Ha come input una chiave $k$ e un messaggio $m$ e restituisce un messaggio cifrato $c$. Potendo essere un algoritmo probabilistico, scriveremo: $c \leftarrow \mathsf{Enc}_k(m)$.}
+    \item{\textbf{$\mathsf{Dec}(\cdot)$:} è un algoritmo polinomiale deterministico che a ha come input una chiave $k$ e un messaggio cifrato $c$ e restituisce un messaggio $m$. Essendo un algoritmo deterministico scriveremo: $m := \mathsf{Dec}_k(c)$.}
+\end{itemize}
+Si definisce inoltre con $\mathcal{M}$ lo spazio di tutti i messaggi che possono essere inviati $\mathcal{K}$ lo spazio di tutte le chiavi. Questi due insiemi variano dipendentemente da come vengono implementate 3 funzioni dello schema.\\
+Inoltre, per ogni $n$, per ogni $k \in \mathcal{K}$ e per ogni $m \in \mathcal{M}$ deve valere la seguente relazione:
+$$
+    m = \mathsf{Dec}_k(\mathsf{Enc}_k(m))
+$$
+

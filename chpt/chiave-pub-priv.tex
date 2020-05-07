@@ -1,0 +1,41 @@
+\chapter{Crittografia a chiave privata simmetrica}
+
+Si parla di crittografia a chiave privata quando si utilizza una singola chiave per cifrare e decifrare l'informazione. \\
+Per assicurare la riservatezza delle informazioni la chiave deve rimanere privata e solo le parti che hanno il permesso di avere accesso alle infomazioni devono esserne in possesso.
+
+\section{Definizione}
+Uno schema crittografico a chiave privata è una tripla di algoritmi polinomiali (Gen, Enc, Dec) definiti come segue: \\
+$\mathsf{Gen}$ è l'algoritmo randomizzato che genera la chiave, ha come input $1^{n}$ e come output una chiave $k$ che soddisfano la relazione $|k| \geq n$. \\
+$\mathsf{Enc}$ è l'algoritmo di cifratura, ha come imput una chiave $k$ e un messaggio $m \in {0,1}*$ e come output un testo cifrato $c$.
+Puo' essere un algoritmo deterministico oppure probabilistico. \\
+$\mathsf{Dec}$ è l'algoritmo deterministico di decifratura, ha come input una chiave $k$ e un testo cifrato c e come output un testo $m$.
+
+\section{Sicurezza}
+Per definire la sicurezza di uno schema a chiave privata bisogna prima definire il tipo di attacco da cui si ci vuole potreggere, che può fortemente dipendere dal contesto in cui lo schema viene usato. \\
+Un attacco è definito dalle capacità e informazioni che l'attaccate possiede, in ordine di gravità sono:
+\subsection{Tipi di attacco}
+\begin{itemize}
+    \item{\textbf{Attacco ciphertext-only:} è l'attaco più banale e descrive il caso in cui l'attaccante possiede solamente il testo cifrato e vuole determinare il messaggio associato}
+    \item{\textbf{Attacco Known-plaintext:} è il caso in cui l'attaccante ha un numero definito di coppie di plaintext e chiphertext, tutti codificati utilizzando la stessa chiave. In questo caso l'obbiettivo dell'attaccante è quello di risalire decodificare un chiphertext di cui non si conosce il plaitext}
+    \item{\textbf{Attacco Chosen-plaintext (CPA):} in questo caso l'attaccante ha la possibilità di eseguire la codifica di qualsiasi messaggio in chiaro. Anche in questo caso, come in quello precedente, l'obbiettivo dell'attaccante è quello di decodificare un chipertext di cui non si conosce il plaintext}
+    \item{\textbf{Attacco Chosen-chipertext (CCA):} questo è il tipo di attacco più grave in cui l'attaccante ha la capacità di cifrare qualsiasi plaintext e decodificare qualsiasi testo cifrato di sua scelta, con un'unica eccezione.}
+\end{itemize}
+
+Verrà preso in analisi soltanto quest'ultimo tipo di attacco, in quanto provare che uno schema sia sicuro a CCA implica che è sicuro anche contro gli altri tipi di attacco.
+
+\subsection{Attacco Chosen-chipertext (CCA)}
+Per provare matematicamente la sicurezza di uno schema contro questo tipo di attacco, bisogna prima definire formarlmente un esperimento $\mathsf{PrivK}^{\mathsf{cca}}_{\mathcal{A},\Pi}(n)$:
+
+\begin{enumerate}
+    \item{Viene generata una chiave k: $k = Gen(1^{n})$.}
+    \item{All'attaccante $\mathcal{A}$ viene dato l'input n e accesso alla funzione $\mathsf{Enc}_{k}(\cdot)$ e $\mathsf{Dec}_{k}(\cdot)$. Resituisce una coppia di messaggi $m_{0}$ e $m_{1}$ della stessa lunghezza.}
+    \item{Viene scelto in maniera casuale uno dei due messaggi e il corrispettivo ciphertext $c \gets \mathsf{Enc}_{k}(m_{b})$ calcolato e dato ad $\mathcal{A}$. Chiamiamo c il challenge ciphertext.}
+    \item{$\mathcal{A}$ continua ad avere accesso a $\mathsf{Enc}_{k}(\cdot)$ e $\mathsf{Dec}_{k}(\cdot)$ ma non può fare query sul challenge ciphertext.}
+    \item{L'output dell'esperimento è $1$ se $\mathcal{A}$ scopre a quale dei due messaggi $m_{0}$ o $m_{1}$ è associato $c$, $0$ in caso contrario}
+\end{enumerate}
+
+\subsection{Schema CCA-secure}
+Uno schema crittografico a chiave privata è sicuro contro un attacco di tipo Chosen-ciphertext attack (CCA-secure) se per qualsiasi attaccante $\mathcal{A}$ esiste una funzione trascurabile negl tale che: \\
+$$
+    \mathsf{Pr}[\mathsf{PrivK}^{\mathsf{cca}}_{\mathcal{A},\Pi}(n) = 1] \leq \frac{1}{2} + \mathsf{negl}(n)
+$$

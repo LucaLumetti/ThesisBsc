@@ -2,22 +2,24 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[italian]{babel}
+\usepackage [a4paper,left=3cm,bottom=3.5cm,right=3cm,top=3cm]{geometry}
 \usepackage{cite}
-\renewcommand{\baselinestretch}{1.5}
+\usepackage{mathtools}
+\renewcommand{\baselinestretch}{1.2}
 \usepackage[]{frontespizio}
 
 \begin{document}
 
 \begin{frontespizio}
 \Rientro {1.5cm}
-\Margini {1.5cm}{1.5cm}{1.5cm}{1cm}
+\Margini {1.5cm}{1.5cm}{1.5cm}{1.0cm}
 \Universita {Modena e Reggio Emilia}
 \Logo [1.5cm]{img/UNIMORE}
 \Facolta {Ingegneria}
 \Corso [Laurea]{Ingegneria Informatica}
 \Annoaccademico {2019-2020}
 \Titoletto {Prova Finale}
-\Titolo {Crittografia}
+\Titolo {Non so ancora il titolo}
 \Candidato [118447]{Luca Lumetti}
 \Relatore {Prof. Maurizio Casoni}
 \Correlatore{Dott. Martin Klapez}
@@ -25,17 +27,27 @@
 
 \newpage
 
-%\begin{flushright}
-%\null\vspace{\stretch{1}}
-CIAO \cite{Spring:2017}
-%\vspace{\stretch{1}}\null
-%\end{flushright}
-
 \tableofcontents
 \listoffigures
 \listoftables
 
+
+% struttura (?)
+% Schema crittografico
+% - simmetrico
+% - asimmetrico
+% - confidenzialità
+% - integrità
+% - autenticazione
+% - segretezza perfetta
+% - segretezza computazionale.
+% - attacchi? <--- sotto confidenzialità
+% - schema sicuro sotto cca? <-- sotto confidenzialità
+% - block chiper? <-- sotto confidenzialità
+
 \input{chpt/introduzione.tex}
+\input{chpt/chiave-privata.tex}
+%\input{chpt/chiave-pubblica.tex}
 \input{chpt/conclusione.tex}
 
 \appendix

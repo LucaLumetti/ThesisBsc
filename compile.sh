@@ -1,7 +1,13 @@
+#!/bin/bash
+# compile frontpage, bib, mainfile and chapters
 [ ! -d pdf ] && mkdir pdf
-[ ! -f thesis.bib ] && echo "Manca il file thesis.bib"
-[ ! -f thesis.tex ] && echo "Manca il file thesis.tex"
-[ ! -f thesis-frn.tex] && echo "Manca il file thesis-frn.tex"
+[ ! -f thesis.bib ] && echo "Manca il file thesis.bib" && exit 0
+
+[ -f pdf/thesis-frn.tex ] && cp pdf/thesis-frn.tex thesis-frn.tex
+[ -f pdf/thesis-frn.pdf ] && cp pdf/thesis-frn.pdf thesis-frn.pdf
+
+[ ! -f thesis.tex ] && echo "Manca il file thesis.tex" && exit 0
+[ ! -f thesis-frn.tex ] && echo "Manca il file thesis-frn.tex" && exit 0
 
 cp thesis.bib pdf/thesis.bib
 bibtex pdf/thesis > /dev/null 2>&1
