@@ -1,0 +1,34 @@
+\section{Integrità}
+L'integrità assicura che un messaggio non venga modificato da una terza parte che si inserisce nella comunicazione. E' importante notare che in alcuni casi, un messaggio può essere modificato anche senza essere decodificato, ad esempio togliendo parti del ciphertext, scambiandone l'ordine oppure aggiungendo parti copiandone alcune dallo stesso ciphertext.
+Per assicurare l'integrità di uno schema a chiave privata si fa uso delle \emph{funzioni di hash}
+
+\subsection{Funzioni di Hash}
+Le funzioni di Hash sono funzioni che \emph{comprimono} un messaggio di lunghezza arbitraria in una stringa generalmente più corta.\\
+Più precisamente, una funzione di hash è una coppia $(\mathsf{Gen}, \mathsf{H})$ tale che:
+\begin{itemize}
+    \item{$\mathsf{Gen}$ è un algoritmo probabilistico e polinomiale che a fronte di un input $1^n$ restituisce come output una chiave $s$}
+    \item{$\mathsf{H}$ è un algoritmo polinomiale deterministico con input una stringa $x \in \{0, 1\}^{*}$  e output una stringa $\mathsf{H}^{s}(x) \in \{0, 1\}^{l(n)}$ con $l$ polinomio in $n$.}
+\end{itemize}
+Inoltre una funzione di hash deve avere le seguenti proprietà:
+\begin{enumerate}
+    \item{Non deve essere invertibile, deve quindi essere impossibile ricavare la stringa $x$ partendo dal suo hash $\mathsf{H}^{s}(s)$.}
+    \item{Deve essere impossibile trovare un messaggio $x$ tale che il suo hash sia un valore dato.}
+    \item{Anche solo un piccolo cambiamento nella stringa $x$ deve modificare in modo considerevole il nuovo hash in modo che appaia incorrelato con quello della stringa originale (effetto valanga).}
+    \item{Deve essere impossibile trovare due messaggi diversi che hanno lo stesso hash (resistente alle collisioni).}
+\end{enumerate}
+Nella pratica le funzioni di hash non utilizzano una chiave (più precisamente la chiave è inclusa nella funzione) e quindi vengono definite solamente delle funzioni di hash, alcune delle più note sono MD5, SHA-1, SHA-256.
+Nella crittografia le funzioni di hash vengono utilizzate all'interno delle funzioni di MAC che vedremo nel successivo capitolo relativo all'autenticazione.
+Vengono comunque utilizzate in svariati campi sempre per assicurare l'integrità dei dati ma sono utilizzate anche nelle hash table per salvare e accedere ad un dato in un tempo praticamente costante.
+Per dare comunque un'idea di come una funzione di hash possa assicurare l'integrità si può pensare al seguente caso:\\
+Assumiamo che due parti, A e B, devono comunicare tra loro. In particolare A deve mandare un messaggio $m$ a B. Il mittente invia la coppia $(m, \mathsf{H}(m))$, in questo modo, il ricevente può verificare l'integrità del messaggio calcolando a sua volta $\mathsf{H}(m)$ e confrontando il risultato con quello ricevuto. Se i due hash corrispondono, allora il messaggio è considerabile valido.\\
+
+\subsection{Collisioni} % forse potrei aggiungergi il birthday attack
+Riprendendo la definizione di funzione di hash, si può notare che essendo il dominio della funzione illimitato a differenza del codominio, esisteranno un numero infinito di stringhe il cui hash è identico (principio del cassetto).
+In questo caso, quando due stringhe $x_1 \neq x_2 \rightarrow \mathsf{H}(x_1) = \mathsf{H}(x_2)$ si dice  che si ha una \emph{collisione}.
+Quando si fa riferimento alle funzioni di hash utilizzare nell'ambito della crittografia, si parla di 3 requisiti di sicurezza:
+\begin{enumerate}
+    \item{\textbf{Collision resistance:} è il requisito più difficile da ottenere ed implica che, per una funzione di hash, data la chiave $s$, per un algoritmo polinomiale sia difficile trovare due valori $x_1 \neq x_2$ per cui $\mathsf{H}^s(x_1) = \mathsf{H}^s(x_2)$.}
+    \item{\textbf{Second preimage resistance:} implica che data la chiave $s$ e una stringa $x_1$, sia difficile per un algoritmo polinomiale trovare una stringa $x_2$ per cui $\mathsf{H}^s(x_1) = \mathsf{H}^s(x_2)$}.
+    \item{\textbf{Preimage resistance:} implica che, data una chiave $s$ e un hash $y$, sia difficile per un algoritmo polinomiale trovare un valore $x$ per cui $\mathsf{H}^s(x) = y$.}
+\end{enumerate}
+Si nota che $1 \implies 2$ e $2 \implies 3$.

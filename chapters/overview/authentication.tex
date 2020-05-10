@@ -1,0 +1,25 @@
+\section{Authentication}
+In a cryptographic scheme, authentication is needed to authenticate the entities involved in the comunication. In other words, authentication assure that messages received by Bob are for sure from Alice.\\
+To ensure authentication hash functions are used and that's why, in general, authentication imply integrity (but the opposite is not true).
+
+% Even if we have defined hash functions as functions with an infinite domain, in practice they are first constructed to be \emph{fixed-length}, that means their domain is finite, then they are extended to cover the full domain ${0,1}^{*}$.\\
+% This extension is made easy by the Merkle-Damg\r{a}rd transform which also preserve the collision resistant propriety.\\
+% We will denote the given fixed-length collision-resistant hash function (or \emph{compression function}) by $\mathsf{Gen}_h, h)$ and use it to construct a general collision-resistant hash function $(\mathsf{Gen}, H)$ that maps inputs of any length to outputs of length $l(n)$.\\
+% Let $\mathsf{Gen}_h, h)$ be a fixed-length hash function with input length $2l(n)$ and output $l(n)$. Construct a variable-length hash function $(\mathsf{Gen}, H)$ as follow:
+% \begin{itemize}
+%     \item{$\mathsf{Gen}(n)$: upon input $n$, run the key-generation algorithm $\mathsf{Gen}_h$. $s \leftarrow \mathsf{Gen}_h$.}
+%     \item{$H^s(x)$: upon input key $s$ and message $x \in {0, 1}^{*}$, compute as follows:
+%         \begin{enumerate}
+%             \item{Pad $x$ with zeroes until it's length is a multiple of $l(n)$. Let $L = |x|$ (length of the string) and let $B = \ceil[\Big]{\frac{L}{l(n)}}$ (number of blocks of length $l(n)$).}
+%             \item{Define $z_0 := 0^{l(n)}$ and then $\forall i = 1,...,B$, compute:
+%                 $$
+%                     z_i := h^s(z_{i-1}||x_i)
+%                 $$
+%                 where $h^s$ is the given fixed-length hash function.}
+%             \item{Output $z = H^s(z_B||L)$.}
+%         \end{enumerate}}
+% \end{itemize}
+% We remark that the value $z_0$, also known as \emph{IV} or \emph{initialization vector} can be replaced with any costant of length $l(n)$ bits.
+
+% \subsection{Message Authentication Code (MAC)}
+% A message authentication codes, also know as \emph{tags}, are small string used to authenticate a message and to protect its integrity

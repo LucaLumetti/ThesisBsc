@@ -5,6 +5,7 @@
 \usepackage [a4paper,left=3cm,bottom=3.5cm,right=3cm,top=3cm]{geometry}
 \usepackage{cite}
 \usepackage{mathtools}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
 \renewcommand{\baselinestretch}{1.2}
 \usepackage[]{frontespizio}
 
@@ -16,7 +17,7 @@
 \Universita {Modena e Reggio Emilia}
 \Logo [1.5cm]{img/UNIMORE}
 \Facolta {Ingegneria}
-\Corso [Laurea]{Ingegneria Informatica}
+\Corso [Laurea Triennale]{Ingegneria Informatica}
 \Annoaccademico {2019-2020}
 \Titoletto {Prova Finale}
 \Titolo {Non so ancora il titolo}
@@ -32,23 +33,21 @@
 \listoftables
 
 
-% struttura (?)
-% Schema crittografico
-% - simmetrico
-% - asimmetrico
-% - confidenzialità
-% - integrità
-% - autenticazione
-% - segretezza perfetta
-% - segretezza computazionale.
-% - attacchi? <--- sotto confidenzialità
-% - schema sicuro sotto cca? <-- sotto confidenzialità
-% - block chiper? <-- sotto confidenzialità
+%       Confidenzialità
+%           Perfect Secrecy
+%           Computation Secrecy
+%       Integrity
+%           Hash Functions
+%           Collision Resistant hf
+%           Finding Collisions
+%       Authentication
+%           MAC
 
-\input{chpt/introduzione.tex}
-\input{chpt/chiave-privata.tex}
-%\input{chpt/chiave-pubblica.tex}
-\input{chpt/conclusione.tex}
+\input{chapters/introduction.tex}
+\input{chapters/overview.tex}
+\input{chapters/private-key-cryptography}
+\input{chapters/public-key-cryptography}
+\input{chapters/conclusions.tex}
 
 \appendix
 

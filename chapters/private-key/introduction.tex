@@ -1,0 +1,14 @@
+With "private-key cryptography" we refer to schemes that use a single key to encrypt and decrypt a message, for this reason, they are also called "symmetric key schemes".
+These are the first scheme ever created and they are still widely used today. They are defined as follows:\\
+A \textbf{private-key scheme} is a tuple $(\mathsf{Gen}, \mathsf{Enc}, \mathsf{Dec})$ such that:
+\begin{itemize}
+    \item{\textbf{$\mathsf{Gen}(\cdot)$:} is a randomized polynomial algorithm that generates the key. It takes as input a security parameter $n$ and outputs a key $k$ that satisfies $|k| \geq n$.\\
+        We will write this as $k \leftarrow \mathsf{Gen}(1^n)$.}
+    \item{\textbf{$\mathsf{Enc}(\cdot)$:} is a probabilistic polynomial-time algorithm that encrypts the message (or other forms of information) to send. It takes as input a key $k$ and a message $m$ to outputs a ciphertext $c$. We will refer to the unencrypted message also as plaintext.\\
+        We will write this as $c \leftarrow \mathsf{Enc}_k(m)$.}
+    \item{\textbf{$\mathsf{Dec}(\cdot)$:} is a deterministic polynomial-time algorith that takes as input a ciphertext $c$ and a key $k$, and outputs a plaintext $m$.\\
+        We will write this as $m := \mathsf{Dec}_k(c)$}
+\end{itemize}
+It's also required that for every $n$, every $k$ and every $m$ it holds that $m = \mathsf{Dec}_k(\mathsf{Enc}_k(m))$.\\
+
+

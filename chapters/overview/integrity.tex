@@ -1,0 +1,43 @@
+\section{Integrity}
+Integrity assures to the receiver that a message is not corrupted or that an adversary modifies and relays it (for example in a man-in-the-middle attack).\\
+The decryption of the message is not always needed to modify it but can be enough to have the ciphertext.\\
+Hash functions are used to assure the integrity of a message.
+
+\subsection{Hash Functions}
+In general, hash functions are just functions that take arbitrary-length strings and compress them into shorter strings.
+A hash function is a pair $(\mathsf{Gen}, \mathsf{H})$ such that:
+\begin{itemize}
+    \item{$\mathsf{Gen}$: is a randomized algorithm that takes as input a security parameter $n$ and outputs a key $s$}
+    \item{$\mathsf{H}$: is a deterministic polynomial-time algorithm that takes as input a string $x \in \{0,1\}^*$ and a key $s$ to outputs a string $\mathsf{H}^s(x) \in \{0,1\}^{\mathit{l}(n)}$ where $\mathit{l}$ is a polynomial.}
+\end{itemize}
+In practice, hash functions are unkeyed, or rather it is included in the function itself.\\
+As an example of use of hash functions, imagine that a user A want to send a message $m$ to an user B and he also want to assure its integrity. After they both agree on the hash function to use, A send $(m, \mathsf{H}(m))$, then upon receiving the pair, B itself calculate $\mathsf{H}(m)$ and verify that it is the same it received from A. If they match, $m$ can be considered intact.\\
+The domain of $\mathsf{H}$ is unlimited, instead, its image is limited. For the pigeon-hole principles this means that there are infinite pairs of differents string $x$ and $x'$ such that $\mathsf{H}(x) = \mathsf{H}(x')$, this is also known as a \emph{collision}.
+
+\subsection{Collision-resistant hash functions}
+Hash functions used in cryptography are also called collision-resistant hash function, to emphatize the importance to have the property that no polynomial-time adversary can find them in a reasonable time.
+There are 3 levels of security:
+\begin{enumerate}
+    \item{\textbf{Collision resistance:} is the most secure level and implies that, given the key $s$, is infeasible to find two different values $x$ and $x'$ such that $\mathsf{H}^s(x) = \mathsf{H}^s(x')$.}
+    \item{\textbf{Second preimage resistance:} implies that, given $s$ and a string $x$, is infeasible for a polynomial-time algorithm to find a string $x'$ such that it collide with $x$}
+    \item{\textbf{Preimage resistance:} implies that given the key $s$ and an hash $y$, is infeasible for a polynomial-time algorithm to find a value $x$ such that $\mathsf{H}^s(x) = y$.}
+\end{enumerate}
+Notice that every hash function that is collision resistant is second preimage resistant, also a second preimage resistant function is a preimage resistant function.\\
+
+\subsection{Birthday Attack}
+The probability of finding a collision by guessing two random string is inversely proportional to the number of bit outputted by the hash function. For example, SHA-256 has a 256-bit hash output resulting in $2^{256}$ possible results.\\
+Now assume we have are given an hash function $\mathsf{H}^s : {0,1}^{*} \rightarrow {0,1}^{l(n)}$. Then we choose at random $q$ distinct strins $x_1,...,x_q$ and compute $y_i := \mathsf{H}^s(x_i)$, $\forall i \in {1,...,q}$. If $q \leq 2^{l(n)}$ the probability is:
+$$
+    1 - \prod_{i = 1}^{q-1} (1 - \frac{i}{2^{l(n)}})
+$$
+This problem has been extensively studied and is related to the so-colled birthday problem and an approximation of the above formula is:
+$$
+    \frac{q^2}{2\cdot2^{l(n)}}
+$$
+If we want to know how much $q$ are needed to have a probability at least of $50\%$ :
+$$
+    \frac{q^2}{2\cdot2^{ln(n)}} = 0.5
+    \quad \implies \quad
+    q = \sqrt{2^{ln(n)}}
+$$
+This mean that if the output length of a hash function is $l(n)$ bits then the birthday attack finds a collision in $\mathcal{O}(q) = \mathcal{O}(2^{l(n)})$ time.\\

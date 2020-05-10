@@ -1,0 +1,22 @@
+\section{Confidentiality}
+Confidentiality assures that in a communication, an eavesdropper is unable to obtain any information about the messages exchanged or the key used to encrypt them. This means that the ciphertext should appear to the adversary as completely random garbage.
+\subsection{Perfectly Secret}
+We denote with $\mathcal{M}$, $\mathcal{K}$, $\mathcal{C}$ respectively the message's space, key's space and ciphertext's space, with $\mathsf{Pr}[M = m]$ the probability that a message $m$ is sent and with $\mathsf{Pr}[C = c]$ the probability that the ciphertext is $c$.\\
+We can define a cryptographic scheme to be perfectly secret if for every $m \in \mathcal{M}$, every $k \in \mathcal{K}$:
+$$
+    \mathsf{Pr}[M = m | C = c] = \mathsf{Pr}[M = m]
+$$
+This means that the distribution over $\mathcal{M}$ is independent of the distribution over $\mathcal{C}$.
+To achieve this definition, the key's space $\mathcal{K}$ must be greater than the message's space $\mathcal{M}$. This can be impractical and inconvenient because perfect secrecy is defined against an adversary with unbounded computational power. We can relax this latter constraint to just be secure against polynomial-time algorithms.
+
+\subsection{Computationally Secret}
+Computational security is the aim of most modern cryptographic schemes. Modern encryption schemes can be broken given enough time and computation, nevertheless, the time required even for the most powerful supercomputer today built is in the order of hundreds of years.\\
+From the previous definition of perfect secrecy we add two relaxations:
+\begin{itemize}
+    \item{Security is only preserved against efficient adversaries.}
+    \item{Adversaries can potentially succeed with a negligible probability.}
+\end{itemize}
+With the term efficient, we refer to an algorithm that can be carried out in \emph{probabilistic polynomial time} (PPT). An algorithm $\mathit{A}$ is said to run in polynomial time if there exists a polynomial $p(\cdot)$ such that for every $x \in {0, 1}^*$, $\mathit{A}(x)$ terminates within at most $p(|x|)$. A probabilistic algorithm is one that has access to some randomness so its results depend on changes.\\
+With negligible probability, we refer to a probability asymptotically smaller than the inverse of every polynomial $p(\cdot)$.
+So a function $f(\cdot)$ is $\mathsf{negligible}$ (typically denoted with $\mathsf{negl}$) if for every polynomial $p(\cdot)$ there exists an $N$ such that for all integers $n > N$ it holds that $f(n) < \frac{1}{p(n)}$.
+
