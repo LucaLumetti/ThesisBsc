@@ -1,5 +1,5 @@
 \section{Confidentiality}
-Confidentiality assures that in a communication, an eavesdropper is unable to obtain any information about the messages exchanged or the key used to encrypt them. This means that the ciphertext should appear to the adversary as completely random garbage.
+Confidentiality assures that in a communication, an adversary is unable to obtain any information about the messages exchanged or the key used to encrypt them. This means that the ciphertext should appear to the adversary as completely random bits.
 \subsection{Perfectly Secret}
 We denote with $\mathcal{M}$, $\mathcal{K}$, $\mathcal{C}$ respectively the message's space, key's space and ciphertext's space, with $\mathsf{Pr}[M = m]$ the probability that a message $m$ is sent and with $\mathsf{Pr}[C = c]$ the probability that the ciphertext is $c$.\\
 We can define a cryptographic scheme to be perfectly secret if for every $m \in \mathcal{M}$, every $k \in \mathcal{K}$:
@@ -20,3 +20,6 @@ With the term efficient, we refer to an algorithm that can be carried out in \em
 With negligible probability, we refer to a probability asymptotically smaller than the inverse of every polynomial $p(\cdot)$.
 So a function $f(\cdot)$ is $\mathsf{negligible}$ (typically denoted with $\mathsf{negl}$) if for every polynomial $p(\cdot)$ there exists an $N$ such that for all integers $n > N$ it holds that $f(n) < \frac{1}{p(n)}$.
 
+% Idea di aggiungere un capitolo sui block cipher, magari seguendo il curso di
+% cursera per definire le PRP e PRF. Il dubbio rimane su cosa scrivere
+% nell'autenticazione. Comunque i block cipher sono anche usati nella pbk

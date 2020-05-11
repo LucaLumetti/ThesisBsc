@@ -24,20 +24,40 @@ There are 3 levels of security:
 \end{enumerate}
 Notice that every hash function that is collision resistant is second preimage resistant, also a second preimage resistant function is a preimage resistant function.\\
 
-\subsection{Birthday Attack}
-The probability of finding a collision by guessing two random string is inversely proportional to the number of bit outputted by the hash function. For example, SHA-256 has a 256-bit hash output resulting in $2^{256}$ possible results.\\
-Now assume we have are given an hash function $\mathsf{H}^s : {0,1}^{*} \rightarrow {0,1}^{l(n)}$. Then we choose at random $q$ distinct strins $x_1,...,x_q$ and compute $y_i := \mathsf{H}^s(x_i)$, $\forall i \in {1,...,q}$. If $q \leq 2^{l(n)}$ the probability is:
-$$
-    1 - \prod_{i = 1}^{q-1} (1 - \frac{i}{2^{l(n)}})
-$$
-This problem has been extensively studied and is related to the so-colled birthday problem and an approximation of the above formula is:
-$$
-    \frac{q^2}{2\cdot2^{l(n)}}
-$$
-If we want to know how much $q$ are needed to have a probability at least of $50\%$ :
-$$
-    \frac{q^2}{2\cdot2^{ln(n)}} = 0.5
-    \quad \implies \quad
-    q = \sqrt{2^{ln(n)}}
-$$
-This mean that if the output length of a hash function is $l(n)$ bits then the birthday attack finds a collision in $\mathcal{O}(q) = \mathcal{O}(2^{l(n)})$ time.\\
+\subsection{The Merkle-Damg\r{a}rd Transform}
+Even if we have defined hash functions as functions with an infinite domain, in practice they are first constructed to be \emph{fixed-length}, that means their domain is finite, then they are extended to cover the full domain $\{0,1\}^{*}$.\\
+This extension is made easy by the Merkle-Damg\r{a}rd transform which also preserves the collision-resistant propriety.\\
+We will denote the given fixed-length collision-resistant hash function (or \emph{compression function}) by $(\mathsf{Gen}_h, h)$ and use it to construct a general collision-resistant hash function $(\mathsf{Gen}, H)$ that maps inputs of any length to outputs of length $l(n)$.\\
+Let $(\mathsf{Gen}_h, h)$ be a fixed-length hash function with input length $2l(n)$ and output $l(n)$. Construct a variable-length hash function $(\mathsf{Gen}, H)$ as follow:
+\begin{itemize}
+    \item{$\mathsf{Gen}(n)$: upon input $n$, run the key-generation algorithm: $s \leftarrow \mathsf{Gen}_h$.}
+    \item{$H^s(x)$: upon input key $s$ and message $x \in {0, 1}^{*}$, compute as follows:
+        \begin{enumerate}
+            \item{Pad $x$ with zeroes until it's length is a multiple of $l(n)$. Let $L = |x|$ (length of the string) and let $B = \ceil[\Big]{\frac{L}{l(n)}}$ (number of blocks of length $l(n)$).}
+            \item{Define $z_0 := 0^{l(n)}$ and then $\forall i = 1,...,B$, compute:
+                $$
+                    z_i := h^s(z_{i-1}||x_i)
+                $$
+                where $h^s$ is the given fixed-length hash function.}
+            \item{Output $z = H^s(z_B||L)$.}
+        \end{enumerate}}
+\end{itemize}
+We remark that the value $z_0$, also known as \emph{IV} or \emph{initialization vector} can be replaced with any constant of length $l(n)$ bits.
+
+% \subsection{Birthday Attack}
+% The probability of finding a collision by guessing two random string is inversely proportional to the number of bit outputted by the hash function. For example, SHA-256 has a 256-bit hash output resulting in $2^{256}$ possible results.\\
+% Now assume we have are given an hash function $\mathsf{H}^s : {0,1}^{*} \rightarrow {0,1}^{l(n)}$. Then we choose at random $q$ distinct strins $x_1,...,x_q$ and compute $y_i := \mathsf{H}^s(x_i)$, $\forall i \in {1,...,q}$. If $q \leq 2^{l(n)}$ the probability is:
+% $$
+%     1 - \prod_{i = 1}^{q-1} (1 - \frac{i}{2^{l(n)}})
+% $$
+% This problem has been extensively studied and is related to the so-colled birthday problem and an approximation of the above formula is:
+% $$
+%     \frac{q^2}{2\cdot2^{l(n)}}
+% $$
+% If we want to know how much $q$ are needed to have a probability at least of $50\%$ :
+% $$
+%     \frac{q^2}{2\cdot2^{ln(n)}} = 0.5
+%     \quad \implies \quad
+%     q = \sqrt{2^{ln(n)}}
+% $$
+% This mean that if the output length of a hash function is $l(n)$ bits then the birthday attack finds a collision in $\mathcal{O}(q) = \mathcal{O}(2^{l(n)})$ time.\\
