@@ -1,0 +1,8 @@
+\section{Block Chipers}
+Block cipher are PRPs families that operate one a block of a fixed length. To ensure security against CPA, there are varius mode of operation for block ciphers, like \emph{Cipher Block Chaining} (CBC) and \emph{Counter Mode} (CTR).
+
+\subsection{Cipher Block Chaining}
+First is an initial vector IV of length n is chosen. So is set $c_0 = IV$ and for every $i > 0$, $c_i := F_k(c_{i-1} \oplus m_i)$. The final ciphertext is $<IV,c_1,...,c_l>$. The IV is not kept secret to allow decription. The encryption of single blocks must be carried out sequentially
+
+\subsection{Randomized Counter Mode}
+As in CBC, an IV of length n is chosen. Then is computed $r_i := F_k((IV + i)\;\mathsf{mod}\;2^n)$. Then each block of the plaintex is computed as $c_i := r_i \oplus m_i$. Unlike in CBC, with CTR it's possible to encrypt and decrypt in parallel.
