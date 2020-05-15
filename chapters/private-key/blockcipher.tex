@@ -2,7 +2,7 @@
 Block cipher are PRPs families that operate one a block of a fixed length. To ensure security against CPA, there are varius mode of operation for block ciphers, like \emph{Electronic Code Block} (ECB), \emph{Cipher Block Chaining} (CBC), and \emph{Counter Mode} (CTR).
 
 \subsection{Electronic Code Book}
-Given a plaintext $m = m_1,...,m_l$, the encryption is obtained by encrypting each block separately: $c = <F_k(m_1),...,F_k(m_l)>$.
+Given a plaintext $m = m_1,...,m_l$, the encryption is obtained by encrypting each block separately: $c = \langle F_k(m_1),...,F_k(m_l) \rangle$.
 The decryption is carried out by applying to every block $F_k^{-1}$. Due to the fact that the encryption process is deterministic, repeated blocks will be repeated also in the ciphertext. This mean this mode is not CPA-secure neither have indistinguishable encryption in the presence of a eavesdropper.
 \begin{figure}[H]
     \centering
