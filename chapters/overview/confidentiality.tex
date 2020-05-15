@@ -1,13 +1,13 @@
 \section{Confidentiality}
 Confidentiality assures that in a communication, an adversary is unable to obtain any information about the messages exchanged or the key used to encrypt them. This means that the ciphertext should appear to the adversary as completely random bits.
 \subsection{Perfectly Secret}
-We denote with $\mathcal{M}$, $\mathcal{K}$, $\mathcal{C}$ the message's space, key's space and ciphertext's space, respectively,  with $\mathsf{Pr}[M = m]$ the probability that a message $m$ is sent and with $\mathsf{Pr}[C = c]$ the probability that the ciphertext is $c$.\\
+We denote with $\mathcal{M}$, $\mathcal{K}$, $\mathcal{C}$ the message space, key space and ciphertext space, respectively,  with $\mathsf{Pr}[M = m]$ the probability that a message $m$ is sent and with $\mathsf{Pr}[C = c]$ the probability that the ciphertext is $c$.\\
 We can define a cryptographic scheme to be perfectly secret if for every $m \in \mathcal{M}$, every $k \in \mathcal{K}$:
 $$
     \mathsf{Pr}[M = m | C = c] = \mathsf{Pr}[M = m]
 $$
 This means that the distribution over $\mathcal{M}$ is independent of the distribution over $\mathcal{C}$.
-To achieve this definition, the key's space $\mathcal{K}$ must be greater than the message's space $\mathcal{M}$. This can be impractical and inconvenient because perfect secrecy is defined against an adversary with unbounded computational power. We can relax this latter constraint to just be secure against polynomial-time algorithms.
+To achieve this definition, the key space $\mathcal{K}$ must be greater than the message space $\mathcal{M}$. This can be impractical and inconvenient because perfect secrecy is defined against an adversary with unbounded computational power. We can relax this latter constraint to just be secure against polynomial-time algorithms.
 
 \subsection{Computationally Secret}
 Computational security is the aim of most modern cryptographic schemes. Modern encryption schemes can be broken given enough time and computation, nevertheless, the time required even for the most powerful supercomputer today built is in the order of hundreds of years.\\
@@ -20,6 +20,11 @@ With the term efficient, we refer to an algorithm that can be carried out in \em
 With negligible probability, we refer to a probability asymptotically smaller than the inverse of every polynomial $p(\cdot)$.
 So a function $f(\cdot)$ is $\mathsf{negligible}$ (typically denoted with $\mathsf{negl}$) if for every polynomial $p(\cdot)$ there exists an $N$ such that for all integers $n > N$ it holds that $f(n) < \frac{1}{p(n)}$.
 
-% Idea di aggiungere un capitolo sui block cipher, magari seguendo il curso di
-% cursera per definire le PRP e PRF. Il dubbio rimane su cosa scrivere
-% nell'autenticazione. Comunque i block cipher sono anche usati nella pbk
+\subsection{Types of Attacks}
+Based on the capableness of the adversary, we can define different types of attack that can be carried out against a scheme, which are:
+\begin{itemize}
+    \item{\textbf{Ciphertext-only attack:} is the case when the attacker can only access the ciphertext and try to determine the plaintext that was encrypted. In this case the attacker is also called "eavesdropper".}
+    \item{\textbf{Known-plaintext attack:} in this attack the adversary learns one or more pairs of plaintexts/ciphertexts encrypted under the same key. The objective of the attacker is to determine the corresponding plaintext of a ciphertext that has not been known yet.}
+    \item{\textbf{Chosen-plaintext attack (CPA):} the adversay has the ability to obtain the encryption of any plaintext of his choise. Again the aim of the adversary is to decrypt a ciphertext to get the relative plaintext.}
+    \item{\textbf{Chosen-ciphertext attack (CCA):} the final and stronger type of attack. Here the adversary has the ability to encrypt any plaintext and decrypt any chipertext of its choise. Once again the aim is the same of the previous attacks but with the constraint that the ciphertext that it want to crack can't be directly decripted.}
+\end{itemize}

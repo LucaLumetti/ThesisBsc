@@ -44,6 +44,11 @@ Let $(\mathsf{Gen}_h, h)$ be a fixed-length hash function with input length $2l(
 \end{itemize}
 We remark that the value $z_0$, also known as \emph{IV} or \emph{initialization vector} can be replaced with any constant of length $l(n)$ bits.
 
+\subsection{Authentication}
+In a cryptographic scheme, authentication is needed to authenticate the entities involved in the communication. In other words, authentication assures that messages received by Bob are for sure from Alice.\\
+We talk about authentication in the integrity section because the difference between these two concept is blurry and, moreover, authentication implies integrity (but not viceversa).\\
+In symmetric schemes we will see \emph{messages authentication codes} (MAC) and in asymmetric scheme we will see \emph{digital signatures algorithms} (DSA).
+
 % \subsection{Birthday Attack}
 % The probability of finding a collision by guessing two random string is inversely proportional to the number of bit outputted by the hash function. For example, SHA-256 has a 256-bit hash output resulting in $2^{256}$ possible results.\\
 % Now assume we have are given an hash function $\mathsf{H}^s : {0,1}^{*} \rightarrow {0,1}^{l(n)}$. Then we choose at random $q$ distinct strins $x_1,...,x_q$ and compute $y_i := \mathsf{H}^s(x_i)$, $\forall i \in {1,...,q}$. If $q \leq 2^{l(n)}$ the probability is:
