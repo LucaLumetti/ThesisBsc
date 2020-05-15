@@ -1,0 +1,11 @@
+% Nel caso volessi presentare DES, cambiare in Feistel Network. Bisognerà in
+% qualche modo introdurre le S-boxes
+\section{Substitution-Permutation Networks}
+\subsection{Confusion-diffusion}
+The confusion-diffusion paradigm has been instroduced by Shannon for construction conside pseudorandom functions. The idea is to break the input up into small parts, execute on them different random functions, mixed the outputs togheder and repeat the process for a finite amount of time. One cycle of this process is called \emph{round} while the full construction is called \emph{network}.\\
+Shannon's original definitions are that confusion refers to making the relationship between the ciphertext and the key as complex as possible, diffusion refers to hide the relationship between the ciphertext and the plaintext.
+Confusion achieve the fact that each bit of the ciphertext depend on several part of the key. This mean that even if a single bit of the key is changed, most of the bits in the ciphertext will be affected.
+Diffusion imply that changing a single bit in the plaintext results in a change of (statistically) half of the bits in the ciphertext. Also if one bit of the ciphertext is changed, half of the bits of the plaintexts changes.
+
+\subsection{Substitution-Permutation Networks}
+Substitution-permutation netoworks are a pratical implementation of the confusion-diffusion paradigm. The substitution part is achieved by small random functions called \emph{S-boxes} and the permutation part is achieved by mixing up the outputs of those functions. In the intermediate results a key is XORed with the output of the round. Differents keys are used each round and each key is derived from the previous one (that is called the \emph{master key}).

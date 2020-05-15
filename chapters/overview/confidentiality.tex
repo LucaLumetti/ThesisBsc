@@ -1,7 +1,7 @@
 \section{Confidentiality}
 Confidentiality assures that in a communication, an adversary is unable to obtain any information about the messages exchanged or the key used to encrypt them. This means that the ciphertext should appear to the adversary as completely random bits.
 \subsection{Perfectly Secret}
-We denote with $\mathcal{M}$, $\mathcal{K}$, $\mathcal{C}$ respectively the message's space, key's space and ciphertext's space, with $\mathsf{Pr}[M = m]$ the probability that a message $m$ is sent and with $\mathsf{Pr}[C = c]$ the probability that the ciphertext is $c$.\\
+We denote with $\mathcal{M}$, $\mathcal{K}$, $\mathcal{C}$ the message's space, key's space and ciphertext's space, respectively,  with $\mathsf{Pr}[M = m]$ the probability that a message $m$ is sent and with $\mathsf{Pr}[C = c]$ the probability that the ciphertext is $c$.\\
 We can define a cryptographic scheme to be perfectly secret if for every $m \in \mathcal{M}$, every $k \in \mathcal{K}$:
 $$
     \mathsf{Pr}[M = m | C = c] = \mathsf{Pr}[M = m]
