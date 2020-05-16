@@ -5,8 +5,8 @@ A \textbf{private-key scheme} is a tuple $(\mathsf{Gen}, \mathsf{Enc}, \mathsf{D
         We will write this as $k \leftarrow \mathsf{Gen}(1^n)$.}
     \item{\textbf{$\mathsf{Enc}(\cdot)$:} is a probabilistic polynomial-time algorithm that encrypts the message (or other forms of information) to send. It takes as input a key $k$ and a message $m$ to outputs a ciphertext $c$. We will refer to the unencrypted message also as plaintext.\\
         We will write this as $c \leftarrow \mathsf{Enc}_k(m)$.}
-    \item{\textbf{$\mathsf{Dec}(\cdot)$:} is a deterministic polynomial-time algorith that takes as input a ciphertext $c$ and a key $k$, and outputs a plaintext $m$.\\
+    \item{\textbf{$\mathsf{Dec}(\cdot)$:} is a deterministic polynomial-time algorithm that takes as input a ciphertext $c$ and a key $k$, and outputs a plaintext $m$.\\
         We will write this as $m := \mathsf{Dec}_k(c)$}
 \end{itemize}
 It's also required that for every $n$, every $k$ and every $m$ it holds that $m = \mathsf{Dec}_k(\mathsf{Enc}_k(m))$.\\
-Now we want to look which tools are used in the contruction of secure private-key scheme.
+Now we want to look which tools are used in the construction of secure private-key scheme.
