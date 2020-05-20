@@ -1,3 +1,10 @@
-\section{Message Authentication Codes}
+\section{Message Authentication Codes}\label{sec:mac}
 Everything we have seen until now assures only confidentiality. As introduced in \autoref{chap:overview}, message authentication codes (MAC) also called \emph{tags} are used to introduce both integrity and authentication.\\
-Even if an encryption scheme assures confidentiality, integrity, and authentication are important to assure that the message is not altered by an external entity.
+Even if an encryption scheme assures confidentiality, integrity and authentication are important to assure that the message is not tampered by an external entity. This is a propriety of encryption schemes called \emph{malleability}.\\
+For example, in CBC an attacker, because the IV and ciphertext blocks are directly XORed with the next block output, a bit changed in the IV or the ciphertext block corresponds with a bit changed in the plaintext. If the attacker is able to guess the format of the uncrypted message the attacker could be able to change sensitive informations of the plaintext.\\
+A message authentication code (MAC) is a tuple of PPT algorithms $(\mathsf{Gen},\mathsf{Mac},\mathsf{Vrfy})$ such that:
+\begin{itemize}
+    \item{$\mathsf{Gen(\cdot)}$: it takes as input $n$ and outputs an uniformly distrbuted key of length $n$.\\We will write this as $k \leftarrow \mathsf{Gen}(1^n)$.}
+    \item{$\mathsf{Mac(\cdot)}$: It receive as input a key $k \in \{0,1\}^n$ and a message $m \in \{0,1\}^{*}$ to output a \emph{tag} $t \in \{0,1\}^{*}$.\\We will write this as $t \leftarrow \mathsf{Mac}_k(m)$.}
+    \item{$\mathsf{Vrfy(\cdot,\cdot)}$ on input $k \in \{0,1\}^n$, $m \in \{0,1\}^{*}$ and $t \in \{0,1\}^{*}$ it output a bit $b \in {0,1}$.\\We will write this as $b \leftarrow \mathsf{Vrfy}_k(m, t)$.}
+\end{itemize}
