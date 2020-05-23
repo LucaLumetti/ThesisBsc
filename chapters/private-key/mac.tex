@@ -1,10 +1,26 @@
 \section{Message Authentication Codes}\label{sec:mac}
 Everything we have seen until now assures only confidentiality. As introduced in \autoref{chap:overview}, message authentication codes (MAC) also called \emph{tags} are used to introduce both integrity and authentication.\\
-Even if an encryption scheme assures confidentiality, integrity and authentication are important to assure that the message is not tampered by an external entity. This is a propriety of encryption schemes called \emph{malleability}.\\
-For example, in CBC an attacker, because the IV and ciphertext blocks are directly XORed with the next block output, a bit changed in the IV or the ciphertext block corresponds with a bit changed in the plaintext. If the attacker is able to guess the format of the uncrypted message the attacker could be able to change sensitive informations of the plaintext.\\
+Even if an encryption scheme assures confidentiality, integrity, and authentication are important to assure that the message is not tampered by an external entity. This is a property of encryption schemes called \emph{malleability}.\\
+For example, in CBC an attacker, because the IV and ciphertext blocks are directly XORed with the next block output, a bit changed in the IV or the ciphertext block corresponds with a bit changed in the plaintext. If the attacker can guess the format of the unencrypted message the attacker could be able to change sensitive information on the plaintext.\\
 A message authentication code (MAC) is a tuple of PPT algorithms $(\mathsf{Gen},\mathsf{Mac},\mathsf{Vrfy})$ such that:
 \begin{itemize}
-    \item{$\mathsf{Gen(\cdot)}$: it takes as input $n$ and outputs an uniformly distrbuted key of length $n$.\\We will write this as $k \leftarrow \mathsf{Gen}(1^n)$.}
-    \item{$\mathsf{Mac(\cdot)}$: It receive as input a key $k \in \{0,1\}^n$ and a message $m \in \{0,1\}^{*}$ to output a \emph{tag} $t \in \{0,1\}^{*}$.\\We will write this as $t \leftarrow \mathsf{Mac}_k(m)$.}
-    \item{$\mathsf{Vrfy(\cdot,\cdot)}$ on input $k \in \{0,1\}^n$, $m \in \{0,1\}^{*}$ and $t \in \{0,1\}^{*}$ it output a bit $b \in {0,1}$.\\We will write this as $b \leftarrow \mathsf{Vrfy}_k(m, t)$.}
+    \item{$\mathsf{Gen(\cdot)}$: it takes as input $n$ and outputs a uniformly distributed key of length $n$.\\We will write this as $k \leftarrow \mathsf{Gen}(1^n)$.}
+    \item{$\mathsf{Mac_k(\cdot)}$: It receive as input a key $k \in \{0,1\}^n$ and a message $m \in \{0,1\}^{*}$ to output a \emph{tag} $t \in \{0,1\}^{*}$.\\We will write this as $t \leftarrow \mathsf{Mac}_k(m)$.}
+    \item{$\mathsf{Vrfy_k(\cdot,\cdot)}$ on input $k \in \{0,1\}^n$, $m \in \{0,1\}^{*}$ and $t \in \{0,1\}^{*}$ it output a bit $b \in {0,1}$.\\We will write this as $b \leftarrow \mathsf{Vrfy}_k(m, t)$.}
+\end{itemize}
+It also required that for every $n$, every $k$, and every $m$ it holds that: $\mathsf{Vrfy}_k(m, \mathsf{Mac}_k(m)) = 1$.
+The security of MAC is that an adversary can't forge a valid tags for a new message in a reasonable time.\\
+The construction of MAC can be based on block cipher, like \emph{CBC-MAC}, or collision-resistant hash functions built with the Merkle-Damg\r{a}rd transform (see \autoref{sec:collisionresistant} and \autoref{sec:merkledamgard}), like \emph{NMAC} or \emph{HMAC}.
+
+\subsection{HMAC}
+With $H^s_{\mathsf{IV}}(x)$ the hash function constructed with merkle-darmg\r{a}rd transform with $z_0$ set to an arbitrary value $\mathsf{IV}$ and we also define a keyed version of the compression function $h^s(x)$ used in $\mathsf{H}$ by $h^s_k(x) = h^s(k\;||\;x)$. They are also defined two constants $\mathsf{opad}$ and $\mathsf{ipad}$ of length $n$ (the length of a single block of the input to $\mathsf{H}$).\\
+The string $\mathsf{opad}$ is formed by repeating the byte $\mathsf{0x36}$ as many times needed and the string $\mathsf{ipad}$ is formed in the same way using the byte $\mathsf{0x5C}$.\\
+The HMAC construction is the same defined above in this section, with two additions:
+\begin{itemize}
+    \item{The $\mathsf{Gen}$ algorithm also run the key generation for the hash function obtaining $s$.}
+    \item{The $\mathsf{Mac}_k$ algorithm is computed by:
+$$
+    \mathsf{HMAC}^s_k(x) = \mathsf{H}^s_\mathsf{IV}((k \oplus \mathsf{opad})\;||\;\mathsf{H}_\mathsf{IV}((k \oplus \mathsf{ipad})\;||\;x))
+$$
+        }
 \end{itemize}

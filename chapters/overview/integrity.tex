@@ -14,7 +14,7 @@ In practice, hash functions are unkeyed or, rather, the key is included in the f
 As an example of use of hash functions, imagine that a user A wants to send a message $m$ to an user B and he also wants to assure its integrity. After they both agree on the hash function to use, A sends $(m, \mathsf{H}(m))$, then upon receiving the pair, B itself calculates $\mathsf{H}(m)$ and verifies that it is the same it received from A. If they match, $m$ can be considered intact.\\
 The domain of $\mathsf{H}$ is unlimited, instead, its image is limited. For the pigeon-hole principles this means that there are infinite pairs of differents string $x$ and $x'$ such that $\mathsf{H}(x) = \mathsf{H}(x')$, this is also known as a \emph{collision}.
 
-\subsection{Collision-resistant hash functions}
+\subsection{Collision-resistant hash functions}\label{sec:collisionresistant}
 Hash functions used in cryptography are also called collision-resistant hash function, to emphasize the importance to have the property that no polynomial-time adversary can reverse them in a reasonable time.
 There are 3 levels of security:
 \begin{enumerate}
@@ -24,7 +24,7 @@ There are 3 levels of security:
 \end{enumerate}
 Notice that every hash function that is collision resistant is second preimage resistant, also a second preimage resistant function is a preimage resistant function.\\
 
-\subsection{The Merkle-Damg\r{a}rd Transform}
+\subsection{The Merkle-Damg\r{a}rd Transform}\label{sec:merkledamgard}
 Even if we have defined hash functions as functions with an infinite domain, in practice they are first constructed to be \emph{fixed-length}, that means their domain is finite, then they are extended to cover the full domain $\{0,1\}^{*}$.\\
 This extension is made easy by the Merkle-Damg\r{a}rd transform which also preserves the collision-resistant propriety.\\
 We will denote the given fixed-length collision-resistant hash function (or \emph{compression function}) by $(\mathsf{Gen}_h, h)$ and use it to construct a general collision-resistant hash function $(\mathsf{Gen}, H)$ that maps inputs of any length to outputs of length $l(n)$.\\
