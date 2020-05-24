@@ -8,19 +8,24 @@ A message authentication code (MAC) is a tuple of PPT algorithms $(\mathsf{Gen},
     \item{$\mathsf{Mac_k(\cdot)}$: It receive as input a key $k \in \{0,1\}^n$ and a message $m \in \{0,1\}^{*}$ to output a \emph{tag} $t \in \{0,1\}^{*}$.\\We will write this as $t \leftarrow \mathsf{Mac}_k(m)$.}
     \item{$\mathsf{Vrfy_k(\cdot,\cdot)}$ on input $k \in \{0,1\}^n$, $m \in \{0,1\}^{*}$ and $t \in \{0,1\}^{*}$ it output a bit $b \in {0,1}$.\\We will write this as $b \leftarrow \mathsf{Vrfy}_k(m, t)$.}
 \end{itemize}
-It also required that for every $n$, every $k$, and every $m$ it holds that: $\mathsf{Vrfy}_k(m, \mathsf{Mac}_k(m)) = 1$.
-The security of MAC is that an adversary can't forge a valid tags for a new message in a reasonable time.\\
-The construction of MAC can be based on block cipher, like \emph{CBC-MAC}, or collision-resistant hash functions built with the Merkle-Damg\r{a}rd transform (see \autoref{sec:collisionresistant} and \autoref{sec:merkledamgard}), like \emph{NMAC} or \emph{HMAC}.
+It also required that for every $n$, every $k$, and every $m$ it holds that:
+$$
+\mathsf{Vrfy}_k(m, \mathsf{Mac}_k(m)) = 1
+$$
+The security of MAC is that an adversary can't forge a valid tag for a new message in a reasonable time.\\
+The construction of MAC can be based on block ciphers, like \emph{CBC-MAC}, or collision-resistant hash functions built with the Merkle-Damg\r{a}rd transform (see \autoref{sec:collisionresistant} and \autoref{sec:merkledamgard}), like \emph{NMAC} or \emph{HMAC}.
 
-\subsection{HMAC}
-With $H^s_{\mathsf{IV}}(x)$ the hash function constructed with merkle-darmg\r{a}rd transform with $z_0$ set to an arbitrary value $\mathsf{IV}$ and we also define a keyed version of the compression function $h^s(x)$ used in $\mathsf{H}$ by $h^s_k(x) = h^s(k\;||\;x)$. They are also defined two constants $\mathsf{opad}$ and $\mathsf{ipad}$ of length $n$ (the length of a single block of the input to $\mathsf{H}$).\\
-The string $\mathsf{opad}$ is formed by repeating the byte $\mathsf{0x36}$ as many times needed and the string $\mathsf{ipad}$ is formed in the same way using the byte $\mathsf{0x5C}$.\\
+\subsection{HMAC construction}
+With $H^s_{\mathsf{IV}}(x)$ the hash function constructed with Merkle-Darmg\r{a}rd transform with $z_0$ set to an arbitrary value $\mathsf{IV}$ and we also define a keyed version of the compression function $h^s(x)$ used in $\mathsf{H}$ by $h^s_k(x) = h^s(k\;||\;x)$. Two constants are also defined: $\mathsf{opad}$ and $\mathsf{ipad}$ of length $n$ (the length of a single block of the input to $\mathsf{H}$).\\
+The string $\mathsf{opad}$ is formed by repeating the byte $\mathsf{0x5C}$ as many times needed and the string $\mathsf{ipad}$ is formed in the same way using the byte $\mathsf{0x36}$.\\
 The HMAC construction is the same defined above in this section, with two additions:
 \begin{itemize}
-    \item{The $\mathsf{Gen}$ algorithm also run the key generation for the hash function obtaining $s$.}
+    \item{The $\mathsf{Gen}$ algorithm also run the key generation for the hash function obtaining the value $s$.}
     \item{The $\mathsf{Mac}_k$ algorithm is computed by:
 $$
-    \mathsf{HMAC}^s_k(x) = \mathsf{H}^s_\mathsf{IV}((k \oplus \mathsf{opad})\;||\;\mathsf{H}_\mathsf{IV}((k \oplus \mathsf{ipad})\;||\;x))
+    \mathsf{HMAC}^s_k(x) = \mathsf{H}^s_\mathsf{IV}(k \oplus \mathsf{opad}\;||\;\mathsf{H}_\mathsf{IV}(k \oplus \mathsf{ipad}\;||\;x))
 $$
         }
 \end{itemize}
+The hash function $\mathsf{H}$ can be any cryptographic hash function like SHA-1, SHA-256, etc..., and the relative HMACs are named HMAC-SHA1, HMAC-SHA256. The cryptographic strength of HMAC depends on the properties of the underlying hash function, so using hash functions like MD5 or SHA-1 is not recomended.
+%encrypt then auth
