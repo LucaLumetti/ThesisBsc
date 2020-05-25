@@ -7,24 +7,26 @@ $$
     \mathsf{Pr}[M = m | C = c] = \mathsf{Pr}[M = m]
 $$
 This means that the distribution over $\mathcal{M}$ is independent of the distribution over $\mathcal{C}$.
-To achieve this definition, the key space $\mathcal{K}$ must be greater than the message space $\mathcal{M}$. This can be impractical and inconvenient because perfect secrecy is defined against an adversary with unbounded computational power. We can relax this latter constraint to just be secure against polynomial-time algorithms.
+To achieve this definition, the key space $\mathcal{K}$ must be greater than the message space $\mathcal{M}$. This can be impractical and inconvenient because perfect secrecy is defined against an adversary with unbounded computational power. We can relax this latter constraint to be secure against polynomial-time algorithms.
 
 \subsection{Computationally Secret}
 Computational security is the aim of most modern cryptographic schemes. Modern encryption schemes can be broken given enough time and computation, nevertheless, the time required even for the most powerful supercomputer today built is in the order of hundreds of years.\\
-From the previous definition of perfect secrecy we add two relaxations:
+From the previous definition of perfect secrecy, we add two relaxations:
 \begin{itemize}
     \item{Security is only preserved against efficient adversaries.}
     \item{Adversaries can potentially succeed with a negligible probability.}
 \end{itemize}
-With the term efficient, we refer to an algorithm that can be carried out in \emph{probabilistic polynomial time} (PPT). An algorithm $\mathit{A}$ is said to run in polynomial time if there exists a polynomial $p(\cdot)$ such that for every $x \in {0, 1}^*$, $\mathit{A}(x)$ terminates within at most $p(|x|)$. A probabilistic algorithm is one that has access to some randomness so its results depend on changes.\\
+With the term efficient, we refer to an algorithm that can be carried out in \emph{probabilistic polynomial time} (PPT). An algorithm $\mathit{A}$ is said to run in polynomial time, if there exists a polynomial $p(\cdot)$ such that for every $x \in \{0, 1\}^*$, $\mathit{A}(x)$ terminates within at most $p(|x|)$. A probabilistic algorithm is one that has access to some randomness so its results depend on changes.\\
 With negligible probability, we refer to a probability asymptotically smaller than the inverse of every polynomial $p(\cdot)$.
-So a function $f(\cdot)$ is $\mathsf{negligible}$ (typically denoted with $\mathsf{negl}$) if for every polynomial $p(\cdot)$ there exists an $N$ such that for all integers $n > N$ it holds that $f(n) < \frac{1}{p(n)}$.
+So, a function $f(\cdot)$ is $\mathsf{negligible}$ (typically denoted with $\mathsf{negl}$) if for every polynomial $p(\cdot)$ there exists an $N$ such that for all integers $n > N$ it holds that $f(n) < \frac{1}{p(n)}$.
 
-\subsection{Types of Attacks}
-Based on the capableness of the adversary, we can define different types of attack that can be carried out against a scheme, which are:
-\begin{itemize}
-    \item{\textbf{Ciphertext-only attack:} is the case when the attacker can only access the ciphertext and try to determine the plaintext that was encrypted. In this case, the attacker is also called "eavesdropper".}
-    \item{\textbf{Known-plaintext attack:} in this attack, the adversary learns one or more pairs of plaintexts/ciphertexts encrypted under the same key. The objective of the attacker is to determine the corresponding plaintext of a ciphertext that has not been known yet.}
-    \item{\textbf{Chosen-plaintext attack (CPA):} the adversary has can obtain the encryption of any plaintext of his choice. Again the adversary aims to decrypt a ciphertext to get the relative plaintext.}
-    \item{\textbf{Chosen-ciphertext attack (CCA):} the final and stronger type of attack. Here the adversary can to encrypt any plaintext and decrypt any ciphertext of its choice. Once again the aim is the same as the previous attacks but with the constraint that the ciphertext that it wants to crack can't be directly decrypted.}
-\end{itemize}
+\begin{nopbreak}
+    \subsection{Types of Attacks}
+    Based on the capableness of the adversary, we can define different types of attack that can be carried out against a scheme, which are:
+    \begin{itemize}
+        \item{\textbf{Ciphertext-only attack:} is the case when the attacker can only access the ciphertext and try to determine the plaintext that was encrypted. In this case, the attacker is also called "eavesdropper".}
+        \item{\textbf{Known-plaintext attack:} in this attack, the adversary learns one or more pairs of plaintexts/ciphertexts encrypted under the same key. The objective of the attacker is to determine the corresponding plaintext of a ciphertext that has not been known yet.}
+        \item{\textbf{Chosen-plaintext attack (CPA):} the adversary can obtain the encryption of any plaintext of his choice. Again, the adversary aims to decrypt a ciphertext to get the relative plaintext.}
+        \item{\textbf{Chosen-ciphertext attack (CCA):} the final and stronger type of attack. Here the adversary can to encrypt any plaintext and decrypt any ciphertext of its choice. Once again the aim is the same as the previous attacks, but with the constraint that the ciphertext that it wants to crack can't be directly decrypted.}
+    \end{itemize}
+\end{nopbreak}

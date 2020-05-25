@@ -1,18 +1,20 @@
 \section{Integrity}
 Integrity assures to the receiver that a message is not corrupted or that an adversary has not modified and relayed it (for example in a man-in-the-middle attack).\\
-The decryption of the message is not always needed to modify it but can be enough to have the ciphertext. An example is shown in section \ref{sec:mac}\\
+The decryption of the message is not always needed to modify it, but can be enough to have the ciphertext. An example is shown in section \ref{sec:mac}.\\
 Hash functions are used to assure the integrity of a message.
 
-\subsection{Hash Functions}
-In general, hash functions are just functions that take arbitrary-length strings and compress them into shorter strings.
-A hash function is a pair $(\mathsf{Gen}, \mathsf{H})$ such that:
-\begin{itemize}
-    \item{$\mathsf{Gen}$: is a randomized algorithm that takes as input a security parameter $n$ and outputs a key $s$}
-    \item{$\mathsf{H}$: is a deterministic polynomial-time algorithm that takes as input a string $x \in \{0,1\}^*$ and a key $s$ to outputs a string $\mathsf{H}^s(x) \in \{0,1\}^{\mathit{l}(n)}$ where $\mathit{l}$ is a polynomial.}
-\end{itemize}
-In practice, hash functions are unkeyed or, rather, the key is included in the function itself.\\
-As an example of use of hash functions, imagine that a user A wants to send a message $m$ to an user B and he also wants to assure its integrity. After they both agree on the hash function to use, A sends $(m, \mathsf{H}(m))$, then upon receiving the pair, B itself calculates $\mathsf{H}(m)$ and verifies that it is the same it received from A. If they match, $m$ can be considered intact.\\
-The domain of $\mathsf{H}$ is unlimited, instead, its image is limited. For the pigeon-hole principles this means that there are infinite pairs of differents string $x$ and $x'$ such that $\mathsf{H}(x) = \mathsf{H}(x')$, this is also known as a \emph{collision}.
+\begin{nopbreak}
+    \subsection{Hash Functions}
+    In general, hash functions are just functions that take arbitrary-length strings and compress them into shorter strings.
+    A hash function is a pair $(\mathsf{Gen}, \mathsf{H})$ such that:
+    \begin{itemize}
+        \item{$\mathsf{Gen}$: is a randomized algorithm that takes as input a security parameter $n$ and outputs a key $s$.}
+        \item{$\mathsf{H}$: is a deterministic polynomial-time algorithm that takes as input a string $x \in \{0,1\}^*$ and a key $s$ to output a string $\mathsf{H}^s(x) \in \{0,1\}^{\mathit{l}(n)}$ where $\mathit{l}$ is a polynomial.}
+    \end{itemize}
+\end{nopbreak}
+    In practice, hash functions are unkeyed or, rather, the key is included in the function itself.\\
+    As an example of use of hash functions, imagine that Alice wants to send a message $m$ to Bob and he also wants to assure its integrity. After they both agree on the hash function to use, Alice sends $(m, \mathsf{H}(m))$, then upon receiving the pair, Bob itself calculates $\mathsf{H}(m)$ and verifies that it is the same it received from Alice. If they match, $m$ can be considered intact.\\
+    The domain of $\mathsf{H}$ is unlimited, instead, its image is limited. For the pigeon-hole principle this means that there are infinite pairs of differents string $x$ and $x'$ such that $\mathsf{H}(x) = \mathsf{H}(x')$, this is also known as a \emph{collision}.
 
 \subsection{Collision-resistant hash functions}\label{sec:collisionresistant}
 Hash functions used in cryptography are also called collision-resistant hash function, to emphasize the importance to have the property that no polynomial-time adversary can reverse them in a reasonable time.
@@ -22,12 +24,12 @@ There are 3 levels of security:
     \item{\textbf{Second preimage resistance:} implies that, given $s$ and a string $x$, is infeasible for a polynomial-time algorithm to find a string $x'$ such that it collides with $x$}
     \item{\textbf{Preimage resistance:} implies that given the key $s$ and an hash $y$, is infeasible for a polynomial-time algorithm to find a value $x$ such that $\mathsf{H}^s(x) = y$.}
 \end{enumerate}
-Notice that every hash function that is collision resistant is second preimage resistant, also a second preimage resistant function is a preimage resistant function.\\
+Notice that every hash function that is collision resistant is second preimage resistant, also a second preimage resistant function is a preimage resistant function.
 
 \subsection{The Merkle-Damg\r{a}rd Transform}\label{sec:merkledamgard}
 Even if we have defined hash functions as functions with an infinite domain, in practice they are first constructed to be \emph{fixed-length}, that means their domain is finite, then they are extended to cover the full domain $\{0,1\}^{*}$.\\
-This extension is made easy by the Merkle-Damg\r{a}rd transform which also preserves the collision-resistant propriety.\\
-We will denote the given fixed-length collision-resistant hash function (or \emph{compression function}) by $(\mathsf{Gen}_h, h)$ and use it to construct a general collision-resistant hash function $(\mathsf{Gen}, H)$ that maps inputs of any length to outputs of length $l(n)$.\\
+This extension is made easy by the Merkle-Damg\r{a}rd transform which, also preserves the collision-resistant propriety.\\
+We will denote the given fixed-length collision-resistant hash function (or \emph{compression function}) by $(\mathsf{Gen}_h, h)$ and use it to construct a general collision-resistant hash function $(\mathsf{Gen}, H)$ that maps inputs of any length to output of length $l(n)$.\\
 Let $(\mathsf{Gen}_h, h)$ be a fixed-length hash function with input length $2l(n)$ and output $l(n)$. Construct a variable-length hash function $(\mathsf{Gen}, H)$ as follow:
 \begin{itemize}
     \item{$\mathsf{Gen}(n)$: upon input $n$, run the key-generation algorithm: $s \leftarrow \mathsf{Gen}_h$.}
@@ -46,7 +48,7 @@ We remark that the value $z_0$, also known as \emph{IV} or \emph{initialization 
 
 \subsection{Authentication}
 In a cryptographic scheme, authentication is needed to authenticate the entities involved in the communication. In other words, authentication assures that messages received by Bob are for sure from Alice.\\
-We talk about authentication in the integrity section because the difference between these two concepts is blurry, moreover authentication implies integrity (but not vice versa).\\
+We talk about authentication in the integrity section because, the difference between these two concepts is blurry, moreover, authentication implies integrity (but not vice versa).\\
 In symmetric schemes, we will see \emph{messages authentication codes} (MAC) and in asymmetric schemes, we will see \emph{digital signatures algorithms} (DSA).
 
 % \subsection{Birthday Attack}

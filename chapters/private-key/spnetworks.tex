@@ -2,10 +2,10 @@
 % qualche modo introdurre le S-boxes
 \section{Substitution-Permutation Networks}
 \subsection{Confusion-diffusion}
-The confusion-diffusion paradigm has been introduced by Shannon for construction concise pseudorandom functions. The idea is to break the input up into small parts, execute on them different random functions, mixed the outputs together and, repeat the process for a finite amount of time. One cycle of this process is called \emph{round} while the full construction is called \emph{network}.\\
+The confusion-diffusion paradigm has been introduced by Shannon for concise construction  pseudorandom functions. The idea is to break the input up into small parts, execute on them different random functions, mixed the outputs together and, repeat the process for a finite amount of time. One cycle of this process is called \emph{round}, while the full construction is called \emph{network}.\\
 Shannon's original definitions are that confusion refers to making the relationship between the ciphertext and the key as complex as possible, diffusion refers to hide the relationship between the ciphertext and the plaintext.
-Confusion achieves the fact that each bit of the ciphertext depends on several parts of the key. This means that even if a single bit of the key is changed, most of the bits in the ciphertext will be affected.
-Diffusion implies that changing a single bit in the plaintext results in a change of (statistically) half of the bits in the ciphertext. Also if one bit of the ciphertext is changed, half of the bits of the plaintexts change.
+Confusion achieves the fact that each bit of the ciphertext depends on several parts of the key. This means that, even if a single bit of the key is changed, most of the bits in the ciphertext will be affected.
+Diffusion implies that changing a single bit in the plaintext results in a change of (statistically) half of the bits in the ciphertext. Also, if one bit of the ciphertext is changed, half of the bits of the plaintexts change.
 
 \subsection{Substitution-Permutation Networks}
 Substitution-permutation networks are a practical implementation of the confusion-diffusion paradigm. The substitution part is achieved by small random functions called \emph{S-boxes} and the permutation part is achieved by mixing up the outputs of those functions. In the intermediate results, a key is XORed with the output of the round. Different keys are used each round and each key is derived from the previous one (that is called the \emph{master key}).

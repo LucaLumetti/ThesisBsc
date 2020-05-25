@@ -8,24 +8,28 @@
 \usepackage{float}
 \usepackage[hidelinks]{hyperref}
 \DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+
 \renewcommand{\baselinestretch}{1.2}
+\newenvironment{nopbreak}
+  {\par\nobreak\vfil\penalty0\vfilneg\vtop\bgroup}
+  {\par\xdef\tpd{\the\prevdepth}\egroup\prevdepth=\tpd}
 \usepackage[]{frontespizio}
 
 \begin{document}
 
 \begin{frontespizio}
-\Rientro {1.5cm}
-\Margini {1.5cm}{1.5cm}{1.5cm}{1.0cm}
-\Universita {Modena e Reggio Emilia}
-\Logo [1.5cm]{img/UNIMORE}
-\Facolta {Ingegneria}
-\Corso [Laurea Triennale]{Ingegneria Informatica}
-\Annoaccademico {2019-2020}
-\Titoletto {Prova Finale}
-\Titolo {Titolo}
-\Candidato [118447]{Luca Lumetti}
-\Relatore {Prof. Maurizio Casoni}
-\Correlatore{Dott. Martin Klapez}
+    \Rientro {1.5cm}
+    \Margini {1.5cm}{1.5cm}{1.5cm}{1.0cm}
+    \Universita {Modena e Reggio Emilia}
+    \Logo [1.5cm]{img/UNIMORE}
+    \Facolta {Ingegneria}
+    \Corso [Laurea Triennale]{Ingegneria Informatica}
+    \Annoaccademico {2019-2020}
+    \Titoletto {Prova Finale}
+    \Titolo {Titolo}
+    \Candidato [118447]{Luca Lumetti}
+    \Relatore {Prof. Maurizio Casoni}
+    \Correlatore{Dott. Martin Klapez}
 \end{frontespizio}
 
 \newpage
