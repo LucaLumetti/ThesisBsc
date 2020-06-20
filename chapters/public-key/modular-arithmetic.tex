@@ -1,0 +1,15 @@
+\section{Group Theory and Modular Arithmetic}
+Public key scheme are deeply based on modular arithmetich and groups theory.
+\subsection{Notation used}
+We denote with $N$ a positive integer, with $p$ and $q$ a prime and with $\Z_N$ the set of integers from $0$ to $N-1$. This set is a ring, where addition and multiplication can be done using modulo $N$. If $x \in \Z_N$ we denote with $x^{-1}$ the inverse of $x$ such that $x^{-1} \in \Z_N$ and $xx^{-1} = 1 \; (mod \: N)$. An element $x$ has an inverse if and only if $\mathsf{gcd}(x,N) = 1$.\\
+With $\Z_N^{*}$ we denote a subset of $\Z_N$ that only contains the elements that has an inverse.
+\subsection{Fermat's theorem and Euler's generalization}
+The Fermat's theorem state that:
+$$
+    \forall x \in \Z_p^{*}, \quad x^{p-1} = 1 \; (mod \: p)
+$$
+The Euler theorem is a direct generalization of the Fermat's theorem and state that:
+For an integer $N$, define $\phi(N) = |\Z_N^{*}|$, then
+$$
+    \forall x \in \Z_N^{*}, \quad x^{\phi(N)} = 1 \; (mod \: N)
+$$
