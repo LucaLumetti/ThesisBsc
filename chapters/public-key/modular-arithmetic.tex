@@ -1,15 +1,19 @@
 \section{Group Theory and Modular Arithmetic}
-Public key scheme are deeply based on modular arithmetich and groups theory.
-\subsection{Notation used}
-We denote with $N$ a positive integer, with $p$ and $q$ a prime and with $\Z_N$ the set of integers from $0$ to $N-1$. This set is a ring, where addition and multiplication can be done using modulo $N$. If $x \in \Z_N$ we denote with $x^{-1}$ the inverse of $x$ such that $x^{-1} \in \Z_N$ and $xx^{-1} = 1 \; (mod \: N)$. An element $x$ has an inverse if and only if $\mathsf{gcd}(x,N) = 1$.\\
-With $\Z_N^{*}$ we denote a subset of $\Z_N$ that only contains the elements that has an inverse.
-\subsection{Fermat's theorem and Euler's generalization}
-The Fermat's theorem state that:
+Public key scheme are deeply based on modular arithmetich and groups theory. This section define the notation used and some property and theorem used in this field.
+\subsection{Notation}
+We denote with $N$ a positive integer, with $p$ and $q$ a prime and with $\Z_N$ the set of integers from $0$ to $N-1$. This set is a group under addition modulo $N$ but not under multiplication because not every element of $\Z_N$ has an inverse. If $x \in \Z_N$ we denote with $frac{1}{x}$ or $x^{-1}$ the inverse of $x$, such that $x^{-1} \in \Z_N$ and $xx^{-1} = 1 \; (mod \: N)$. As already said, in $\Z_N$ not every element as an inverse, for a $x$ is possible to find an inverse if and only if $\mathsf{gcd}(x,N) = 1$.\\
+With $\Z_N^{*}$ is denoted a subset of $\Z_N$ that only contains the elements that has an inverse and thus is a group even under multiplication modulo $N$. The cardinality of the group $\Z_N^{*}$ is denoted with the Euler function $\phi(N) = |\Z_N^{*}|$
+\subsection{Extended Euleclidean Algorithm}
+The Extended Euler's Algoritm is used to efficiencly find the inverse of an element $x \in \Z_N$. Given two integers $a, b$ is possible to find two integers $x, y$ such that satify $ax + by = \mathsf{gcd}(a, b)$, which is known as Bézout's identity.
+In the group $\Z_N$, is possible find the inverse of $a \in \Z_N$ that is co-prime with $N$ by using the extended euclidean algorithm to solve the Bézout's identity:
 $$
-    \forall x \in \Z_p^{*}, \quad x^{p-1} = 1 \; (mod \: p)
+   ax+Ny = gcd(a, N) = 1 \implies ax = 1 (mod N)
 $$
-The Euler theorem is a direct generalization of the Fermat's theorem and state that:
-For an integer $N$, define $\phi(N) = |\Z_N^{*}|$, then
-$$
-    \forall x \in \Z_N^{*}, \quad x^{\phi(N)} = 1 \; (mod \: N)
-$$
+Then $x$ is the inverse of $a$, or $x = a^{-1}$.
+\subsection{Euler's Theorem}
+This theorem is a generalization of the Fermat Theorem and is used to simplify exponential operations over the group $\Z_N^{*}$. For an integer $N$ define the Euler's $\phi$ function as $\phi(N) = |\Z_N^{*}|$, then for every $N$:
+$$\forall x \in \Z_N^{*}: \quad x^{\phi(N)} = 1 (mod \Z_N)$$
+% An important propriety of finite groups is that exponentiation can be easy computed if the order of the group is known.
+% Let $\phi(N) = |\Z_N^{*}|$, then for every $x \in \Z_N^{*}$ and every integer $i$ we have $x^i = x^{i mod \phi(N)}$.
+% The order of a group $\Z_N^{*}$ where $N = pq$ is $\phi(N) = (p-1)(q-1)$.
+% Then, if $p$ and $q$ are know, is easy to compute $\phi(N)$ so it easy to work in the exponent modulo $\phi(N)$. If $p$ and $q$ are not known, then calculate $\phi(N)$ is hard as factoring $N$, which is known to be a NP problem. The fact that $p*q$ is easy to compute but, given an integer $N$, find his factors is hard is the base of asymmetric schemes. This is known as the \emph{RSA assumption} and is the base of most public key schemes.

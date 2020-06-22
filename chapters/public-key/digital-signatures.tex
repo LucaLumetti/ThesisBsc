@@ -1,0 +1,14 @@
+\section{Digital Signatures}
+Digital Signatures are the public-key counterpart of Message Authentication Codes in private-key because they both ensure integrity and authentication. Digital signatures has the advantage of simplify the key management and make a message publicly verifiable.
+A digital signature allow an entity A to sign a message such that everyone who know the public key of A has been not modified. Also, the digital signature certificate the ownership of a public key.\\
+Digital signatures also have the property of \emph{non-repudiation}, that is once A publicizes his public key and sign a message with latter, he can't deny having done so. This is impractical in MACs because the key used to forge the MAC must be kept secret and if it is publicized, then everyone can forge a valid MAC.\\
+A digital signature scheme is a tuple $(\mathsf{Gen}, \mathsf{Sign}, \mathsf{Vrfy})$ such that:
+\begin{itemize}
+    \item{$\mathsf{Gen}$}: is the same for public-key scheme, it takes as input the security parameter $n$ to output a pair of keys (pk, sk) respectively the public and the private key.
+    \item{$\mathsf{Sign}$}: takes as input a private key $sk$ and a message $m$ to output a signature $\sigma \leftarrow \mathsf{Sign}_{sk}(m)$.
+    \item{$\mathsf{Vrfy}(\cdot)$}: takes as input a signature $\sigma$, a public key $pk$ and a message $m$. The output is a bit $b := \mathsf{Vrfy}_{pk}(m, \sigma)$. If the bit is 1 then the signature is valid otherwise is invalid.
+\end{itemize}
+
+\subsection{Certificate Authority}
+Certificates authorities are thrusted third party entity that issue digital cetificates, used by an entity to check the ownership of a public key %wiki
+%Certificates and Public key infrastructures
