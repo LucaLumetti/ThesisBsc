@@ -1,0 +1,35 @@
+\section{HTTP}
+Hypertext Transfer Protocol is an application-layer protocol for transmitting hypermedia documents, such HTML documents. It's often based over the TCP/IP layer and it is stateless. Is a request/reply based on the exchange of individual messages. Requests are the messages sent by the client (usually a web browser), responses are messages sent by the server.
+\subsection{Request}
+An HTTP request includes:
+\begin{itemize}
+    \item{\textbf{Method:} specify the operation the client want to execute on the server, like GET, POST, PUT, ...}
+    \item{\textbf{URL:} is the identifier of the requested object}
+    \item{\textbf{Version:} the HTTP version used}
+    \item{\textbf{Headers:} additional informations that can be used by the server, like date, the browser used, cookies. They are not mandatory.}
+\end{itemize}
+Here an example of an HTTP request:
+\begin{lstlisting}
+    GET /directory/page.html HTTP/1.1
+    Connection: close
+    User-agent: Mozilla/5.0 (X11; Linux x86_64)
+    Accept: text/html, image/jpeg
+    Accept-language: it-IT,en-US
+\end{lstlisting}
+
+\subsection{Response}
+An HTTP response includes, besides the content of the resuorce requested, a header with the HTTP version, a status code and some additional response information.
+Here an example of an HTTP response:
+\begin{lstlisting}
+    HTTP/1.1 200 OK
+    Content-language: it
+    Content-length: 18844
+    Content-type: text/html; charset=UTF-8
+    Date: Mon, 22 Jun 2020 21:50:53 GMT
+    Server: nginx
+
+    <!DOCTYPE html><head> ... the page ... </html>
+\end{lstlisting}
+\subsection{HTTPS vs HTTP}
+HTTPS is an extension of HTTP, this mean that the request and response format is exactly the same but the messages exchanged are encrypted by a criptographic protocol. The protocol used is Transport Layer Security (TLS) and is the successor of Secure Socket Layer (SSL) today deprecated, that's why HTTPS is also referred to as HTTP over TLS.\\
+Other differences are that HTTPS use the well-known port 443 while HTTP use the well-known port 80, and the URL start with \texttt{https://} instead of \texttt{http://}.

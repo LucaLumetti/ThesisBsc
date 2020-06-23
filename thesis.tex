@@ -8,9 +8,10 @@
 \usepackage{amssymb}
 \usepackage{float}
 \usepackage[hidelinks]{hyperref}
+\usepackage{listings}
 \DeclarePairedDelimiter\ceil{\lceil}{\rceil}
 
-\renewcommand{\baselinestretch}{1.2}
+\renewcommand{\baselinestretch}{1.5}
 \newenvironment{nopbreak}
   {\par\nobreak\vfil\penalty0\vfilneg\vtop\bgroup}
   {\par\xdef\tpd{\the\prevdepth}\egroup\prevdepth=\tpd}
@@ -18,6 +19,15 @@
 
 \newcommand*{\Z}{\mathbb{Z}}
 \newcommand*{\N}{\mathbb{N}}
+
+\lstset{
+    frame=tb,
+    aboveskip=3mm,
+    belowskip=3mm,
+    columns=flexible,
+    basicstyle={\small\ttfamily},
+    breaklines=true,
+    tabsize=3}
 
 \begin{document}
 
@@ -30,7 +40,7 @@
     \Corso [Laurea Triennale]{Ingegneria Informatica}
     \Annoaccademico {2019-2020}
     \Titoletto {Prova Finale}
-    \Titolo {Titolo}
+    \Titolo {Modern Cryptography and the Hypertext Transfer Protocol Secure}
     \Candidato [118447]{Luca Lumetti}
     \Relatore {Prof. Maurizio Casoni}
     \Correlatore{Dott. Martin Klapez}
@@ -46,6 +56,7 @@
 \input{chapters/overview.tex}
 \input{chapters/private-key-cryptography}
 \input{chapters/public-key-cryptography}
+\input{chapters/https}
 \input{chapters/conclusions.tex}
 
 \appendix

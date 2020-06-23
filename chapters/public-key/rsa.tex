@@ -13,8 +13,8 @@ The RSA encryption scheme is defined by the Public-Key Cryptography Standards (P
 \end{itemize}
 In the encryption function, the message $m$ is the original message padded using OAEP (Optimal Asymmetric Encryption Padding)
 \subsection{Optimal Asymmetric Encryption Padding}
-A padding in the encryption function is needed to construct a probabilistic encryption function thus be secure against chosen plaintext attacks. Usually the combination of OAEP with Textbook RSA is called RSA-OAEP.\\
-Given a message $m$, the message $\hat{m}$ that will be encrypted is obtained by picking a random fixed length string $r$ of length $2|m|$ and two hash functions $\mathsf{G}$ and $\mathsf{H}$ are chosen. Then, after computing the string $m' := \mathsf{G}(r) \oplus (m||0^{|m|})$, the final padded message is:
+The $\mathsf{Enc(\cdot)}$ function described above is deteministic, thus the scheme is not secure under chosen plaintext attacks. In order to fix this issue, the original message must be padded with some random bits that, during the decoding, they will be removed. The most common padding technique used with RSA is the \emph{Optimal Asymmetric Encryption Padding} often written as OAEP. Usually the combination of OAEP with Textbook RSA is called RSA-OAEP.\\
+The OAEP procede as follow: given a message $m$, the message $\hat{m}$ that will be encrypted is obtained by picking a random fixed length string $r$ of length $2|m|$ and two hash functions $\mathsf{G}$ and $\mathsf{H}$ are chosen. Then, after computing the string $m' := \mathsf{G}(r) \oplus (m||0^{|m|})$, the final padded message is
 $$
     \hat{m} := m'||(r \oplus \mathsf{H}(m'))
 $$

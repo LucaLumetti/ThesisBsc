@@ -1,0 +1,6 @@
+\section{TLS}
+The TLS protocol allows to client/server application to communicate while preventing the tampering and eavesdropping of informations. In the HTTPS procol, only the server authenticate to the client but not vice versa. The first phase of TLS is the handshake, needed to choose the TLS version, the algorithms to use and authenticate the server.
+\subsection{Cryptographic Negotiation}
+The first step is performed by the client and is also know as Client Hello. The client share with the server the list of his TLS version supported and his cipher suite.\\
+Then the server choose the version and the encryption algoritms among the ones sent by the client and reply with the choise made and his digital certificate.
+The client check if the certificate is legit using Certificate Authorities that the browser trust.......%domani
