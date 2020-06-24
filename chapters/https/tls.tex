@@ -1,6 +1,67 @@
 \section{TLS}
-The TLS protocol allows to client/server application to communicate while preventing the tampering and eavesdropping of informations. In the HTTPS procol, only the server authenticate to the client but not vice versa. The first phase of TLS is the handshake, needed to choose the TLS version, the algorithms to use and authenticate the server.
-\subsection{Cryptographic Negotiation}
-The first step is performed by the client and is also know as Client Hello. The client share with the server the list of his TLS version supported and his cipher suite.\\
-Then the server choose the version and the encryption algoritms among the ones sent by the client and reply with the choise made and his digital certificate.
-The client check if the certificate is legit using Certificate Authorities that the browser trust.......%domani
+The TLS protocol allows to client/server application to communicate while preventing the tampering and eavesdropping of informations. In the HTTPS procol, only the server authenticate to the client but not vice versa. Is the evolution of another protocol called SSL, today marked as insecure and not anymore supported by browser. Even first versions of TLS are planned to be deprecated during 2020. The most recent version of TLS is 1.3.\\
+To establish a secure connection, the client and the server, before trasmitting any other informations, perform an \emph{handshake}.
+\subsection{Handshake}
+TLS handshake occur after a TCP connection has been opened via a TCP handshake. The last ACK sent by the client also contains the first step of the TLS handshake.
+\subsubsection{1 - Client Hello}
+This is the first step, performed by the client and also know as Cryptographic negotiation. The client share with the server the list of his supported TLS version, his cipher suite and it might send options about the ciphers or client's infos. The client also generate a random 32-byte number, used later to generate symmetric keys, and a session ID used to identify the connection.\\
+Example of Client Hello taken using tshark:
+\begin{lstlisting}
+Handshake Protocol: Client Hello
+Length: 510
+Version: TLS 1.2 (0x0303)
+Random: 55 2a 89 9e f4 21 04 49 f3 17 6a 39 8b cc 4c 39 ab 44 24 3b 25 ce 1b 95 cc 9a 47 52 ac 1c 29 18
+Session ID Length: 32
+Session ID: 54 33 56 39 b8 5f 27 4d 56 cb b1 0f 45 6a b2 92 e9 8d a2 95 97 bd f9 8d f6 b3 b2 a0 4e 9c 4e 7f
+Cipher Suites Length: 32
+Cipher Suite: TLS_AES_128_GCM_SHA256
+Cipher Suite: TLS_AES_256_GCM_SHA384
+... more ciphers ...
+Cipher Suite: TLS_RSA_WITH_AES_128_GCM_SHA256
+Cipher Suite: TLS_RSA_WITH_AES_256_CBC_SHA256
+Extensions Length: 405
+... extensions ...
+\end{lstlisting}
+
+\subsubsection{2 - Server Hello}
+The server reply to the client hello with a server hello. The server send a message containing the TLS server version and a cipher suite, both chosen among the ones received from the Client Hello. It also send a 32-byte random number and the session ID received by the client.\\
+Example of Server Hello taken using tshark:
+\begin{lstlisting}
+Handshake Protocol: Server Hello
+Handshake Type: Server Hello (2)
+Length: 96
+Version: TLS 1.2 (0x0303)
+Random: 72 f2 70 6b 47 f1 d5 98 73 20 68 78 7c 26 a3 7d da 54 d8 30 3a 48 8c bf a7 90 68 95 c5 c0 68 97
+Session ID Length: 32
+Session ID: 54 33 56 39 b8 5f 27 4d 56 cb b1 0f 45 6a b2 92 e9 8d a2 95 97 bd f9 8d f6 b3 b2 a0 4e 9c 4e 7f
+Cipher Suite: TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 (0xcca8)
+Extensions Length: 24
+... extensions ...
+\end{lstlisting}
+
+\subsubsection{3 - Server Certificate}
+The server send his certificate and his public key to the client to prove his identity.\\
+\begin{lstlisting}
+Handshake Protocol: Certificate
+Handshake Type: Certificate (11)
+Length: 2568
+Certificates Length: 1174
+Certificates (1174 bytes)
+Certificate Length: 1174
+Certificate: 308204923082... (id-at-commonName=Let's Encrypt Authority X3, id-at-organizationName=Let's Encrypt, id-at-countryName=US)
+version: v3 (2)
+serialNumber: 0x0a0141420000015385736a0b85eca708
+Algorithm Id: 1.2.840.113549.1.1.11 (sha256WithRSAEncryption)
+modulus: 0x009cd30cf05ae52e47b7725d3783b3686330ead735261925...
+publicExponent: 65537
+... more ...
+\end{lstlisting}
+
+\subsubsection{4 - Client Key Exchange}
+A pre-master secret key is created by the client and sent to the server. How the key is created might depend by the cipher suited selected. The key is encrypted using the server public key. Both client and server compute the \emph{master secret} key using a Pseudorandom function that takes as input the pre-master secret and the 32-byte random value exchanged early. This master key is 48 bytes long and is used to symmetrically encrypt data with one of the private-key cipher chosen from the cipher suite.
+
+\subsubsection{5 - Client Handshake Finished}
+The client is now ready to switch to a secure enviroment. From now on every data sent to the server will be encrypted using the symmetric scheme chosen and the master key. The client sent his first encrypted message saying that the handshake for the client is finished.
+
+\subsubsection{6 - Server Handshake Finished}
+Also the server is ready to switch to a secure enviroment and from now on every data sent by the server will be encrypted using the same algorithms used by the client. It sent an encrytpted message saying that the handshake for the server is terminated.
