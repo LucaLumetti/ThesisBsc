@@ -1,20 +1,20 @@
 \section{Digital Signatures}
-Digital Signatures are the public-key counterpart of Message Authentication Codes in private-key because they both ensure integrity and authentication. Digital signatures has the advantage of simplify the key management and make a message publicly verifiable.
-A digital signature allow an entity A to sign a message such that everyone who know the public key of A has been not modified. Also, the digital signature certificate the ownership of a public key.\\
-Digital signatures also have the property of \emph{non-repudiation}, that is once A publicizes his public key and sign a message with latter, he can't deny having done so. This is impractical in MACs because the key used to forge the MAC must be kept secret and if it is publicized, then everyone can forge a valid MAC.\\
+Digital Signatures are the public-key counterpart of Message Authentication Codes in private-key because they both ensure integrity and authentication. Digital signatures have the advantage of simplifying the key management and make a message publicly verifiable.
+A digital signature allows an entity A to sign a message such that everyone who knows the public key of A has been not modified. Also, the digital signature certificate the ownership of a public key.\\
+Digital signatures also have the property of \emph{non-repudiation}, that is once A publicizes his public key and sign a message with the latter, he can't deny having done so. This is impractical in MACs because the key used to forge the MAC must be kept secret and if it is publicized, then everyone can forge a valid MAC.\\
 A digital signature scheme is a tuple $(\mathsf{Gen}, \mathsf{Sign}, \mathsf{Vrfy})$ such that:
 \begin{itemize}
-    \item{$\mathsf{Gen}$}: is the same for public-key scheme, it takes as input the security parameter $n$ to output a pair of keys (pk, sk) respectively the public and the private key.
+    \item{$\mathsf{Gen}$}: is the same for public-key schemes, it takes as input the security parameter $n$ to output a pair of keys (pk, sk) respectively the public and the private key.
     \item{$\mathsf{Sign}$}: takes as input a private key $sk$ and a message $m$ to output a signature $\sigma \leftarrow \mathsf{Sign}_{sk}(m)$.
-    \item{$\mathsf{Vrfy}(\cdot)$}: takes as input a signature $\sigma$, a public key $pk$ and a message $m$. The output is a bit $b := \mathsf{Vrfy}_{pk}(m, \sigma)$. If the bit is 1 then the signature is valid otherwise is invalid.
+    \item{$\mathsf{Vrfy}(\cdot)$}: takes as input a signature $\sigma$, a public key $pk$, and a message $m$. The output is a bit $b := \mathsf{Vrfy}_{pk}(m, \sigma)$. If the bit is 1 then the signature is valid otherwise is invalid.
 \end{itemize}
 
 \subsection{Public Key Infrastructure}
-A public key infrastructure (PKI) is a set of process used to verify the identity of an entity and associate a public key to it's owner. This relationship is validated using a certificate, created using a digital signature.\\
-A PKI is composed of multiple system:
+A public key infrastructure (PKI) is a set of processes used to verify the identity of an entity and associate a public key to its owner. This relationship is validated using a certificate, created using a digital signature.\\
+A PKI is composed of multiple systems:
 \begin{itemize}
-    \item{\textbf{Certificate Authority:} is a trusted system that sign certificates and by a client to check the ownership of a public key. There can be multiple CAs in a PKI organized in a tree-like structure. CAs that are not in the root have certificates signed by his parent. The root CA sign the certificates by itself, so a good CA need to have a good reputation to be trusted.}
-    \item{\textbf{Registration Authority:} the system where users can identify and request a registration of a key, givin the public key and the e-mail.}
-    \item{\textbf{Certificate Server:} a system where certificates are publicly accessible. Also have informations about revoked or suspended certificates.}
+    \item{\textbf{Certificate Authority:} is a trusted system that signs certificates and by a client to check the ownership of a public key. There can be multiple CAs in a PKI organized in a tree-like structure. CAs that are not in the root have certificates signed by his parent. The root CA sign the certificates by itself, so a good CA needs to have a good reputation to be trusted.}
+    \item{\textbf{Registration Authority:} the system where users can identify and request registration of a key, given the public key and the e-mail.}
+    \item{\textbf{Certificate Server:} a system where certificates are publicly accessible. Also have information about revoked or suspended certificates.}
 \end{itemize}
-Digital certificates are commonly used in electronic signatures, that in some nations have the same legal standing as a handwritten signature, or in HTTPS communication to verify the authenticity of a website, and avoid encounter a malicious website that act as the real one (such scenario is common in a MITM attack). Browser, and other client software, include a set of trusted CA and give the user the possibility to add their own certificates.
+Digital certificates are commonly used in electronic signatures, that in some nations have the same legal standing as a handwritten signature, or in HTTPS communication to verify the authenticity of a website, and avoid encounter a malicious website that acts as the real one (such scenario is common in a MITM attack). Browser, and other client software, include a set of trusted CA and give the user the possibility to add their own certificates.

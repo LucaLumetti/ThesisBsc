@@ -1,11 +1,11 @@
 \section{Group Theory and Modular Arithmetic}
-Public key scheme are deeply based on modular arithmetich and groups theory. This section define the notation and some property and theorem used in this chapter.
+Public key schemes are based on modular arithmetic and group theory. This section defines the notation and some property and theorem used in this chapter.
 \subsection{Notation}
-We denote with $N$ a positive integer, with $p$ and $q$ a prime and with $\Z_N$ the set of integers from $0$ to $N-1$. This set is a group under addition modulo $N$ but not under multiplication because not every element of $\Z_N$ has an inverse. If $x \in \Z_N$ we denote with $frac{1}{x}$ or $x^{-1}$ the inverse of $x$, such that $x^{-1} \in \Z_N$ and $xx^{-1} = 1 \; (mod \: N)$. As already said, in $\Z_N$ not every element as an inverse, for a $x$ is possible to find an inverse if and only if $\mathsf{gcd}(x,N) = 1$.\\
-With $\Z_N^{*}$ is denoted a subset of $\Z_N$ that only contains the elements that has an inverse and thus is a group even under multiplication modulo $N$. The cardinality of the group $\Z_N^{*}$ is denoted with the Euler function $\phi(N) = |\Z_N^{*}|$
-\subsection{Extended Euleclidean Algorithm}
-The Extended Euler's Algoritm is used to efficiencly find the inverse of an element $x \in \Z_N$. Given two integers $a, b$ is possible to find two integers $x, y$ such that satify $ax + by = \mathsf{gcd}(a, b)$, which is known as Bézout's identity.
-In the group $\Z_N$, is possible find the inverse of $a \in \Z_N$ that is co-prime with $N$ by using the extended euclidean algorithm to solve the Bézout's identity:
+We denote with $N$ a positive integer, with $p$ and $q$ a prime and with $\Z_N$ the set of integers from $0$ to $N-1$. This set is a group under addition modulo $N$ but not under multiplication because not every element of $\Z_N$ has an inverse. If $x \in \Z_N$ we denote with $frac{1}{x}$ or $x^{-1}$ the inverse of $x$, such that $x^{-1} \in \Z_N$ and $xx^{-1} = 1 \; (mod \: N)$. As already said, in $\Z_N$ not every element as an inverse, for an $x$ is possible to find an inverse if and only if $\mathsf{gcd}(x,N) = 1$.\\
+$\Z_N^{*}$ denotes a subset of $\Z_N$ that only contains the elements that have an inverse and thus is a group even under multiplication modulo $N$. The cardinality of the group $\Z_N^{*}$ is denoted with the Euler function $\phi(N) = |\Z_N^{*}|$
+\subsection{Extended Euclidean Algorithm}
+The Extended Euler's Algorithm is used to efficiently find the inverse of an element $x \in \Z_N$. Given two integers $a, b$ is possible to find two integers $x, y$ such that satisfy $ax + by = \mathsf{gcd}(a, b)$, which is known as Bézout's identity.
+In the group $\Z_N$, is possible to find the inverse of $a \in \Z_N$ that is co-prime with $N$ by using the extended euclidean algorithm to solve the Bézout's identity:
 $$
    ax+Ny = gcd(a, N) = 1 \implies ax = 1 (mod N)
 $$
