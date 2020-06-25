@@ -1,12 +1,12 @@
 \section{HTTP}
-Hypertext Transfer Protocol is an application-layer protocol for transmitting hypermedia documents, such HTML documents. It's often based over the TCP/IP layer and it is stateless. Is a request/reply based on the exchange of individual messages. Requests are the messages sent by the client (usually a web browser), responses are messages sent by the server.
+Hypertext Transfer Protocol is an application-layer protocol for transmitting hypermedia documents, such as HTML documents. It's often based over the TCP/IP layer and it is stateless. It is a request/reply based on the exchange of individual messages. Requests are the messages sent by the client (usually a web browser), responses are messages sent by the server.
 \subsection{Request}
 An HTTP request includes:
 \begin{itemize}
-    \item{\textbf{Method:} specify the operation the client want to execute on the server, like GET, POST, PUT, ...}
+    \item{\textbf{Method:} specify the operation the client wants to execute on the server, like GET, POST, PUT, ...}
     \item{\textbf{URL:} is the identifier of the requested object}
     \item{\textbf{Version:} the HTTP version used}
-    \item{\textbf{Headers:} additional informations that can be used by the server, like date, the browser used, cookies. They are not mandatory.}
+    \item{\textbf{Headers:} additional information that can be used by the server, like date, the browser used, cookies. They are not mandatory.}
 \end{itemize}
 Here an example of an HTTP request:
 \begin{lstlisting}
@@ -18,7 +18,7 @@ Here an example of an HTTP request:
 \end{lstlisting}
 
 \subsection{Response}
-An HTTP response includes, besides the content of the resuorce requested, a header with the HTTP version, a status code and some additional response information.
+An HTTP response includes, besides the content of the resource requested, a header with the HTTP version, a status code, and some additional response information.
 Here an example of an HTTP response:
 \begin{lstlisting}
     HTTP/1.1 200 OK
@@ -31,5 +31,5 @@ Here an example of an HTTP response:
     <!DOCTYPE html><head> ... the page ... </html>
 \end{lstlisting}
 \subsection{HTTPS vs HTTP}
-HTTPS is an extension of HTTP, this mean that the request and response format is exactly the same but the messages exchanged are encrypted by a criptographic protocol. The protocol used is Transport Layer Security (TLS) and is the successor of Secure Socket Layer (SSL) today deprecated, that's why HTTPS is also referred to as HTTP over TLS.\\
-Other differences are that HTTPS use the well-known port 443 while HTTP use the well-known port 80, and the URL start with \texttt{https://} instead of \texttt{http://}.
+HTTPS is an extension of HTTP, this means that the request and response format is exactly the same but the messages exchanged are encrypted by a cryptographic protocol. The protocol used is Transport Layer Security (TLS) and is the successor of Secure Socket Layer (SSL) today deprecated, that's why HTTPS is also referred to as HTTP over TLS.\\
+Other differences are that HTTPS uses the well-known port 443 while HTTP use the well-known port 80, and the URL starts with \texttt{https://} instead of \texttt{http://}.
