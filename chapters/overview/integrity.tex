@@ -21,7 +21,7 @@ Hash functions used in cryptography are also called collision-resistant hash fun
 There are 3 levels of security:
 \begin{enumerate}
     \item{\textbf{Collision resistance:} is the most secure level and implies that, given the key $s$, is infeasible to find two different values $x$ and $x'$ such that $\mathsf{H}^s(x) = \mathsf{H}^s(x')$.}
-    \item{\textbf{Second preimage resistance:} implies that, given $s$ and a string $x$, is infeasible for a polynomial-time algorithm to find a string $x'$ such that it collides with $x$}
+    \item{\textbf{Second preimage resistance:} implies that, given $s$ and a string $x$, is infeasible for a polynomial-time algorithm to find a string $x'$ such that it collides with $x$.}
     \item{\textbf{Preimage resistance:} implies that given the key $s$ and an hash $y$, is infeasible for a polynomial-time algorithm to find a value $x$ such that $\mathsf{H}^s(x) = y$.}
 \end{enumerate}
 Notice that every hash function that is collision resistant is second preimage resistant, also a second preimage resistant function is a preimage resistant function.

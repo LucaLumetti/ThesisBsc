@@ -7,6 +7,10 @@ So a public key scheme is a tuple $(\mathsf{Gen}, \mathsf{Enc}, \mathsf{Dec})$ s
     \item{$\mathsf{Enc}(\cdot)$: takes as input a public key $pk$ and a message $m$ to output the ciphertext $c \leftarrow \mathsf{Enc}_{pk}(m)$.}
     \item{$\mathsf{Dec}(\cdot)$: takes as input a secret key $sk$ and a ciphertext $c$ to output the message $m := \mathsf{Dec}_{sk}(c)$.}
 \end{itemize}
+It's also required that for every $n$, every possible pair $(pk, sk)$, and every $m$ it holds that
+$$
+m = \mathsf{Dec}_{sk}(\mathsf{Enc}_{pk}(m))
+$$
 To establish a communication between two entities Alice and Bob, first, the key pairs $(A_{pk}, A_{sk})$ and $(B_{pk}, B_{sk})$ are generated, then both public keys are shared among the entities and used to encrypt messages. Imagine that Alice wants to send a message $m$ to Bob, Alice craft the ciphertext using Bob's public key $c \leftarrow  \mathsf{Enc}_{B_{pk}}(m)$ then send it to Bob that will decode it with his secret key\\$m = \mathsf{Dec}_{B_{sk}}(c)$.\\
 In the scenario where $n$ entities participate in the communication, the number of keys involved is $2n$ and every public key can be freely distributed through insecure channels.
 \begin{figure}[H]
