@@ -1,22 +1,22 @@
 \section{RSA}
 \subsection{The RSA problem}
-This problem was first introduced by Rivest, Shamir, and Adleman to lay the basis for the implementation of a public-key scheme. Informally, given $N$, and integer $e > 0$  co-prime with $N$ and an element $y \in \Z_N^{*}$ find $x \in \Z_N^{*}$ such that $x^e = y (mod N)$.\\
-This problem can be easily solved if $\phi(N)$ is known using Euler's Theorem and the Extended Euclidian Algorithm. If $N$ is a semiprime or the product of two prime $N = pq$, then $\phi(N)$ can be easily calculated if the factors of $N$ are known: $\phi(N) = (p-1)(q-1)$. So the problem of computing $\phi(N)$ as hard as and factoring $N$, for which we don't have yet a polynomial algorithm to solve this latter problem.\\
+This problem was first introduced by Rivest, Shamir, and Adleman to lay the basis for the implementation of a public-key scheme. Informally, given $N$, and integer $e > 0$  co-prime with $N$ and an element $y \in \Z_N^{*}$ find $x \in \Z_N^{*}$ such that $x^e = y \; (mod \: N)$.\\
+This problem can be easily solved if $\phi(N)$ is known using Euler's Theorem and the Extended Euclidian Algorithm. If $N$ is a semiprime or the product of two prime $N = pq$, then $\phi(N)$ can be easily calculated if the factors of $N$ are known: $\phi(N) = (p-1)(q-1)$. So the problem of computing $\phi(N)$ is as hard as factoring $N$, for which we don't have yet a polynomial algorithm to solve this latter problem.\\
 The asymmetry that, given two primes $p$ and $q$, is easy to compute $N = pq$ but, given $N$ is hard to find his factors, is exploited to built public keys encryption.
 
 \subsection{RSA Encryption}
 The RSA encryption scheme is defined by the Public-Key Cryptography Standards (PKCS) \#1, today at version 2.2.
 \begin{itemize}
-    \item{$\mathsf{Gen}(n)$: two $n$-bits primes $p$ and $q$ are selected then $N = pq$ is computed. Then a value $e$ (the encryption exponent) is selected such that $e$ is co-prime to $\phi(N)$, and a value $d$ (the decryption exponent) is calculated as $e^{-1} (mod \phi(N))$. The pair $(N, e)$ will be the public key while $(N, d)$ will be the private key.}
-    \item{$\mathsf{Enc}_{N,e}(m)$: given the public key $(N, e)$ and the message $m$, the ciphertext is computed as $c = m^e (mod N)$.}
-    \item{$\mathsf{Dec}_{N,d}(m)$: given the private key $(N, d)$ and the ciphertext $c$, the message is computed as $m = m^d (mod N)$.}
+    \item{$\mathsf{Gen}(n)$: two $n$-bits primes $p$ and $q$ are selected then $N = pq$ is computed. Then a value $e$ (the encryption exponent) is selected such that $e$ is co-prime to $\phi(N)$, and a value $d$ (the decryption exponent) is calculated as $e^{-1} \; (mod \: \phi(N))$. The pair $(N, e)$ will be the public key while $(N, d)$ will be the private key.}
+    \item{$\mathsf{Enc}_{N,e}(m)$: given the public key $(N, e)$ and the message $m$, the ciphertext is computed as $c = m^e \; (mod \: N)$.}
+    \item{$\mathsf{Dec}_{N,d}(m)$: given the private key $(N, d)$ and the ciphertext $c$, the message is computed as $m = m^d \; (mod \: N)$.}
 \end{itemize}
 In the encryption function, the message $m$ is the original message padded using OAEP (Optimal Asymmetric Encryption Padding)
 \subsection{Optimal Asymmetric Encryption Padding}
 The $\mathsf{Enc(\cdot)}$ function described above is deterministic, thus the scheme is not secure under chosen-plaintext attacks. To fix this issue, the original message must be padded with some random bits that, during the decoding, they will be removed. The most common padding technique used with RSA is the \emph{Optimal Asymmetric Encryption Padding} often wrote as OAEP. Usually, the combination of OAEP with Textbook RSA is called RSA-OAEP.\\
 The OAEP proceed as follow: given a message $m$, the message $\hat{m}$ that will be encrypted is obtained by picking a random fixed-length string $r$ of length $2|m|$ and two hash functions $\mathsf{G}$ and $\mathsf{H}$ are chosen. Then, after computing the string $m' := \mathsf{G}(r) \oplus (m||0^{|m|})$, the final padded message is
 $$
-    \hat{m} := m'||(r \oplus \mathsf{H}(m'))
+    \hat{m} := m' \, || \, (r \oplus \mathsf{H}(m'))
 $$
 After the decryption phase, to recover the original unpadded message, the decoded string $\hat{m}$ is split in half $\hat{m} = \hat{m_1}||\hat{m_2}$ with $|\hat{m_1}|=|\hat{m_2}|$. Then compute:
 $$

@@ -6,7 +6,7 @@ A Galois Field (or finite field) is a field with a finite number of elements. Th
 Even if the sum between polynomials is trivial, the multiplication works differently: an irreducible polynomial $g(x)$ of degree $n$ is chosen, then the multiplication in $\mathsf{GF}[p^n]$ is the ordinary product, except you have to take the remainder of the division by $g(x)$. A different $g(x)$ defines a different field.
 
 \subsection{Encryption Method}
-The security of AES comes from confusion and diffusion achieved by a substitution-permutation network with a block size of 128 bit and it supports three different key lengths: 128, 198, and 256 bits. Every key length uses a different number of round, respectively it uses 10, 12, and 14 rounds.\\
+The security of AES comes from confusion and diffusion achieved by a substitution\=/permutation network with a block size of 128 bit and it supports three different key lengths: 128, 198, and 256 bits. Every key length uses a different number of round, respectively it uses 10, 12, and 14 rounds.\\
 Each block of length 128 bits are rearranged in a 4x4 bytes array, called \emph{state}, and for every round the following steps are executed:
 \begin{enumerate}
     \item{\textbf{AddRoundKey:} A 16 byte round key is derived from the master key and it's interpreted as a 4x4 array. Then, the key is XORed with the state array.\\This step consist of computing $a_{i,j} = a_{i,j} \oplus k_{i,j}$ for every $i,j \in {1,...,4}$ where $a_{i,j}$ is the $i^{th}$ row and $j^{th}$ column of the state array and $k_{i,j}$ is the $i^{th}$ row and $j^{th}$ column of the key array.}

@@ -1,14 +1,16 @@
-\documentclass[12pt,a4paper,oneside]{book}
+\documentclass[12pt,a4paper,twoside, openright]{book}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[english]{babel}
-\usepackage [a4paper,left=3cm,bottom=3.5cm,right=3cm,top=3cm]{geometry}
+\usepackage [a4paper,left=3.5cm,bottom=3cm,right=3.5cm,top=3cm]{geometry}
 \usepackage{cite}
 \usepackage{mathtools}
 \usepackage{amssymb}
 \usepackage{float}
 \usepackage[hidelinks]{hyperref}
 \usepackage{listings}
+\usepackage[shortcuts]{extdash}
+%\usepackage{showframe}
 \DeclarePairedDelimiter\ceil{\lceil}{\rceil}
 
 \renewcommand{\baselinestretch}{1.5}
@@ -49,7 +51,7 @@
 \newpage
 
 \tableofcontents
-%\listoffigures
+\listoffigures
 %\listoftables
 
 \input{chapters/introduction.tex}
