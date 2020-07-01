@@ -4,7 +4,7 @@ To establish a secure connection, the client and the server, before transmitting
 \subsection{Handshake}
 TLS handshake occurs after a TCP connection has been opened via a TCP handshake. The last ACK sent by the client also contains the first step of the TLS handshake.
 \subsubsection{1 - Client Hello}
-This is the first step performed by the client and also know as cryptographic negotiation. The client shares with the server the list of his supported TLS version, his cipher suite and it might send options about the ciphers or client's information. The client also generates a random 32-byte number, used later to generate symmetric keys, and a session ID used to identify the connection.\\
+This is the first step performed by the client and is also know as cryptographic negotiation. The client shares with the server the list of his supported TLS versions, his cipher suite, and it might send options about the ciphers or other client information. The client also generates a random 32-byte number, used later to generate symmetric keys, and a session ID used to identify the connection.\\
 Example of Client Hello taken using tshark:
 \begin{lstlisting}
 Handshake Protocol: Client Hello
@@ -24,7 +24,7 @@ Extensions Length: 405
 \end{lstlisting}
 
 \subsubsection{2 - Server Hello}
-The server reply to the client hello with a server hello. The server sends a message containing the TLS server version and a cipher suite, both chosen among the ones received from the Client Hello. It also sends a 32-byte random number and the session ID received by the client.\\
+The server replies to the client hello with a server hello. The server sends a message containing the TLS server version and a cipher suite, both chosen among the ones received from the Client Hello. It also sends a 32-byte random number and the session ID received by the client.\\
 Example of Server Hello taken using tshark:
 \begin{lstlisting}
 Handshake Protocol: Server Hello
@@ -60,12 +60,12 @@ publicExponent: 65537
 
 \subsubsection{4 - Client Key Exchange}
 \par
-A pre-master secret key is created by the client and sent to the server. How the key is created might depend on the cipher suited selected. The key is encrypted using the server public key. Both client and server compute the \emph{master secret} key using a pseudorandom function that takes, as input, the pre-master secret and the 32-byte random value exchanged early. This master key is 48 bytes long and is used to symmetrically encrypt data with one of the private-key cipher chosen from the cipher suite.
+A pre-master secret key is created by the client and sent to the server. How the key is created might depend on the cipher suite selected. The key is encrypted using the server public key. Both client and server compute the \emph{master secret} key using a pseudorandom function that takes, as input, the pre-master secret and the 32-byte random value exchanged early. This master key is 48 bytes long and is used to symmetrically encrypt data with one of the private-key ciphers chosen from the cipher suite.
 
 \subsubsection{5 - Client Handshake Finished}
 \par
-The client is now ready to switch to a secure environment. From now, on every data sent to the server will be encrypted using the symmetric scheme chosen and the master key. The client sent his first encrypted message, saying that the handshake for itself is finished.
+The client is now ready to switch to a secure environment. From now on, every data sent to the server will be encrypted using the symmetric scheme chosen and the master key. The client sends his first encrypted message, saying that the handshake for itself is finished.
 
 \subsubsection{6 - Server Handshake Finished}
 \par
-Also, the server is ready to switch to a secure environment and from now on, every data sent by the server will be encrypted using the same algorithms used by the client. It sent an encrypted message, saying that the handshake for itself is terminated.
+Also, the server is ready to switch to a secure environment and from now on, every data sent by the server will be encrypted using the same algorithms used by the client. It sends an encrypted message, saying that the handshake for itself is terminated.

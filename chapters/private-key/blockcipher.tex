@@ -1,6 +1,6 @@
 \section{Block Ciphers}
 \par
-Block ciphers are PRPs families that operate one a block of a fixed length. To ensure security against CPA, there are various mode of operations for block ciphers, like \emph{Electronic Code Block} (ECB), \emph{Cipher Block Chaining} (CBC), and \emph{Counter Mode} (CTR).
+Block ciphers are PRPs families that operate on a block of a fixed length. To ensure security against CPA, there are various mode of operation for block ciphers, like \emph{Electronic Code Block} (ECB), \emph{Cipher Block Chaining} (CBC), and \emph{Counter Mode} (CTR).
 
 \subsection{Electronic Code Block}
 \par
@@ -14,7 +14,7 @@ The decryption is carried out by applying to every block $F_k^{-1}$. Since the e
 
 \subsection{Cipher Block Chaining}
 \par
-First is an initial vector IV of length n is chosen. So is set $c_0 = IV$ and for every $i > 0$, $c_i := F_k(c_{i-1} \oplus m_i)$. The final ciphertext is $<IV,c_1,...,c_l>$. The IV is not kept secret to allow decryption. The encryption of single blocks must be carried out sequentially
+First an initial vector IV of length n is chosen. Then, is set $c_0 = IV$ and for every $i > 0$, $c_i := F_k(c_{i-1} \oplus m_i)$. The final ciphertext is $<IV,c_1,...,c_l>$. The IV is not kept secret to allow decryption. The encryption of single blocks must be carried out sequentially
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{img/private-key/cbc.jpg}

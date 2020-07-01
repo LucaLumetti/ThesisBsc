@@ -1,7 +1,7 @@
 \section{Confidentiality}
-Confidentiality assures that in a communication, an adversary is unable to obtain any information about the messages exchanged or the key used to encrypt them. This means that the ciphertext should appear to the adversary as completely random bits.
+Confidentiality assures that, in a communication, an adversary is unable to obtain any information about the messages exchanged or the key used to encrypt them. This means that the ciphertext should appear to the adversary as completely random bits.
 \subsection{Perfectly Secret}
-We denote with $\mathcal{M}$, $\mathcal{K}$, $\mathcal{C}$ the message space, key space, and ciphertext space, respectively,  with $\mathsf{Pr}[M = m]$ the probability that a message $m$ is sent and with $\mathsf{Pr}[C = c]$ the probability that the ciphertext is $c$.\\
+We denote with $\mathcal{M}$, $\mathcal{K}$, $\mathcal{C}$ the message space, key space, and ciphertext space, respectively,  with $\mathsf{Pr}[M = m]$ the probability that the message sent is $m$ and with $\mathsf{Pr}[C = c]$ the probability that the ciphertext is $c$.\\
 We can define a cryptographic scheme to be perfectly secret if for every $m \in \mathcal{M}$, every $k \in \mathcal{K}$:
 $$
     \mathsf{Pr}[M = m \, | \, C = c] = \mathsf{Pr}[M = m]
@@ -21,7 +21,7 @@ With negligible probability, we refer to a probability asymptotically smaller th
 So, a function $f(\cdot)$ is $\mathsf{negligible}$ (typically denoted with $\mathsf{negl}$) if for every polynomial $p(\cdot)$ there exists an $N$ such that for all integers $n > N$ it holds that $f(n) < \frac{1}{p(n)}$.
 
 \begin{nopbreak}
-    \subsection{Types of Attacks}
+    \subsection{Types of Attack}
     Based on the capableness of the adversary, we can define different types of attack that can be carried out against a scheme, which are:
     \begin{itemize}
         \item{\textbf{Ciphertext-only attack:} is the case when the attacker can only access the ciphertext and try to determine the plaintext that was encrypted. In this case, the attacker is also called "eavesdropper".}
