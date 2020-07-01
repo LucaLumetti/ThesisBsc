@@ -6,7 +6,7 @@ Let $F : \{0,1\}^{n} \times \{0,1\}^{s} \rightarrow \{0,1\}^{n}$ be an efficient
 $F$ is a pseudorandom permutation (PRP) if:
 \begin{itemize}
     \item{$\forall k \in \{0,1\}^{s}$, $F$ is a bijection from $\{0,1\}^{n}$ to $\{0,1\}^{n}$}.
-    \item{$\forall k \in \{0,1\}^{s}$ exists an efficient algorith $F^{-1}_k$.}
+    \item{$\forall k \in \{0,1\}^{s}$ exists an efficient algorithm $F^{-1}_k$.}
     \item{For all probabilistic polynomial-time distinguishers $D$:
         $$
             |\mathsf{Pr}[D^{F_k}(n) = 1] - \mathsf{Pr}[D^{f_n}(n) = 1]| < \mathsf{negl}(n)
