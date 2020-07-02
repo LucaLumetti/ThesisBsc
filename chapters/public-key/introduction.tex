@@ -11,7 +11,7 @@ It's also required that for every $n$, every possible pair $(pk, sk)$, and every
 $$
 m = \mathsf{Dec}_{sk}(\mathsf{Enc}_{pk}(m))
 $$
-To establish a communication between two entities Alice and Bob, first the key pairs $(A_{pk}, A_{sk})$ and $(B_{pk}, B_{sk})$ are generated, then both public keys are shared among the entities and used to encrypt messages. Imagine that Alice wants to send a message $m$ to Bob, Alice crafts the ciphertext using Bob's public key $c \leftarrow  \mathsf{Enc}_{B_{pk}}(m)$, then sends it to Bob that will decode the message with his secret key $m = \mathsf{Dec}_{B_{sk}}(c)$.\\
+To establish a communication between two entities Alice and Bob, first the key pairs $(A_{pk}, A_{sk})$ and $(B_{pk}, B_{sk})$ are generated, then both public keys are shared among the entities and used to encrypt messages. Imagine that Alice wants to send a message $m$ to Bob, Alice crafts the ciphertext using Bob's public key $c \leftarrow  \mathsf{Enc}_{B_{pk}}(m)$, then sends it to Bob that will decode the message with his secret key: $m = \mathsf{Dec}_{B_{sk}}(c)$.\\
 In the scenario where $n$ entities participate in the communication, the number of keys involved is $2n$ and every public key can be freely distributed through insecure channels.
 \begin{figure}[H]
     \centering

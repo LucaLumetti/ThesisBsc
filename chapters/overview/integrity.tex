@@ -1,11 +1,20 @@
 \section{Integrity}
 Integrity assures to the receiver that a message is not corrupted or that an adversary has not modified and relayed it (for example in a man-in-the-middle attack).\\
 The decryption of the message is not always needed to modify it, but can be enough to have the ciphertext. An example is shown in section \ref{sec:mac}.\\
-Hash functions are used to assure the integrity of a message.
+One-way functions are used to assure the integrity of a message.
+
+\subsection{One-way Functions}
+One-way functions are particular functions that are easy to compute, but computationally hard to invert. Because of this asymmetry, they are often used in cryptography and related fields. Existence of these functions is still an open conjecture and heavly relate with the $\mathsf{P}$ vs $\mathsf{NP}$ problem.\\
+A function $f$ is one-way if:
+\begin{itemize}
+    \item{$f$ can be compute in a polynomial time.}
+    \item{For each probabilistic polynomial time algorithm $\mathsf{F}$ that attemps to invert the function $f$, the probability to succeeds is negligible : $$\mathsf{Pr}[\mathsf{F}(f(x)) = x] < \mathsf{negl}(n), \quad \forall n \in \N$$}
+\end{itemize}
+The first type of one-way functions we see are \emph{hash functions}.
 
 \begin{nopbreak}
-    \subsection{Hash Functions}
-    In general, hash functions are just functions that take arbitrary-length strings and compress them into shorter unintelligible strings.
+    \subsection{Hash Functions}\label{sec:hash}
+    In general, hash functions are just one-way functions that take arbitrary-length strings and compress them into shorter unintelligible strings.
     A hash function is a pair $(\mathsf{Gen}, \mathsf{H})$ such that:
     \begin{itemize}
         \item{$\mathsf{Gen}$: is a randomized algorithm that takes as input a security parameter $n$ and outputs a key $s$.}
@@ -14,7 +23,7 @@ Hash functions are used to assure the integrity of a message.
 \end{nopbreak}
 In practice, hash functions are unkeyed or, rather, the key is included in the function itself.
     As an example of use of hash functions, imagine that Alice wants to send a message $m$ to Bob and he wants to assure its integrity. After they both agree on the hash function to use, Alice sends $(m, \mathsf{H}(m))$, then upon receiving the pair, Bob itself calculates $\mathsf{H}(m)$ and verifies that it is the same it received from Alice. If they match, $m$ can be considered intact.\\
-    While the domain of $\mathsf{H}$ is unlimited, its image it's not. For the pigeon-hole principle, this means that there are infinite pairs of different strings $x$ and $x'$ such that $\mathsf{H}(x) = \mathsf{H}(x')$, this is also known as a \emph{collision}.
+While the domain of $\mathsf{H}$ is unlimited, its image it's not. For the pigeon-hole principle, this means that there are infinite pairs of different strings $x$ and $x'$ such that $\mathsf{H}(x) = \mathsf{H}(x')$, this is also known as a \emph{collision}.
 
 \subsection{Collision-resistant hash functions}\label{sec:collisionresistant}
 Hash functions used in cryptography are also called collision-resistant hash functions, to emphasize the importance to have the property that no polynomial-time adversary can reverse them in a reasonable time.

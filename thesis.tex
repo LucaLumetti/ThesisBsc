@@ -10,13 +10,14 @@
 \usepackage[hidelinks]{hyperref}
 \usepackage{listings}
 \usepackage[shortcuts]{extdash}
+\usepackage[bottom]{footmisc}
 %\usepackage{showframe}
 \DeclarePairedDelimiter\ceil{\lceil}{\rceil}
 
 \renewcommand{\baselinestretch}{1.5}
 \newenvironment{nopbreak}
-  {\par\nobreak\vfil\penalty0\vfilneg\vtop\bgroup}
-  {\par\xdef\tpd{\the\prevdepth}\egroup\prevdepth=\tpd}
+  {\nobreak\vfil\penalty0\vfilneg\vtop\bgroup}
+  {\xdef\tpd{\the\prevdepth}\egroup\prevdepth=\tpd}
 \usepackage[]{frontespizio}
 
 \newcommand*{\Z}{\mathbb{Z}}

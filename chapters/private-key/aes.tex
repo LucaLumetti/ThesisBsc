@@ -1,5 +1,6 @@
 \section{Advanced Encryption Standard}
 AES is a common symmetric key block cipher used worldwide to protect data. It is the successor of \emph{DES} (Data Encryption Standard), another block cipher that now has been classified insecure because of its key length, and after some attacks became too efficient. It has been chosen after a public competition held to meet the need for a new encryption standard.\\
+Before introducing the concrete algorithm, we must introduce Galois field, a finite field used during a step of AES.
 
 \subsection{Galois Field}
 A Galois Field (or finite field) is a field with a finite number of elements. The most common fields used are given by the integers $\mathsf{mod}\,p$ where $p$ is a prime number, also written as $\mathsf{GF}[p]$. For $n > 1$, with $\mathsf{GF}[p^n]$ we refer to all polynomials of degree $n-1$ with coefficients coming from $\mathsf{GF}[p]$. As an example, $\mathsf{GF}[2^3]$ is a field with $8$ elements (the integers from 0 to 7) and they can all be represented as a polynomial of degree $2$ (6 can be represented as $110_2$ or $x^2+x$).\\
