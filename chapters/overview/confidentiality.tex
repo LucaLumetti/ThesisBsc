@@ -20,7 +20,6 @@ With the term efficient, we refer to an algorithm that can be carried out in \em
 With negligible probability, we refer to a probability asymptotically smaller than the inverse of every polynomial $p(\cdot)$.
 So, a function $f(\cdot)$ is $\mathsf{negligible}$ (typically denoted with $\mathsf{negl}$) if for every polynomial $p(\cdot)$ there exists an $N$ such that for all integers $n > N$ it holds that $f(n) < \frac{1}{p(n)}$.
 
-\begin{nopbreak}
     \subsection{Types of Attack}
     Based on the capableness of the adversary, we can define different types of attack that can be carried out against a scheme, which are:
     \begin{itemize}
@@ -29,5 +28,4 @@ So, a function $f(\cdot)$ is $\mathsf{negligible}$ (typically denoted with $\mat
         \item{\textbf{Chosen-plaintext attack (CPA):} the adversary can obtain the encryption of any plaintext of his choice. Again, the adversary aims to decrypt a ciphertext to get the relative plaintext.}
         \item{\textbf{Chosen-ciphertext attack (CCA):} the final and stronger type of attack. Here the adversary can to encrypt any plaintext and decrypt any ciphertext of its choice. Once again the aim is the same as the previous attacks, but with the constraint that the ciphertext that it wants to crack can't be directly decrypted.}
     \end{itemize}
-\end{nopbreak}
-In both CPA and CCA, the adversary is able to obtain the encryption or decryption of any message of his choise by using an \emph{oracle}, a black-box that output the requested operations over a message of his choise.
+In both CPA and CCA, the adversary is able to obtain the encryption or the decryption of any message of his choice by using an \emph{oracle}, a black-box that output the requested operations over a message of his choice.

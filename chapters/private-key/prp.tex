@@ -7,7 +7,7 @@ $F$ is a pseudorandom permutation (PRP) if:
 \begin{itemize}
     \item{$\forall k \in \{0,1\}^{s}$, $F$ is a bijection from $\{0,1\}^{n}$ to $\{0,1\}^{n}$}.
     \item{$\forall k \in \{0,1\}^{s}$ exists an efficient algorithm $F^{-1}_k$.}
-    \item{For all probabilistic polynomial-time distinguishers\footnote{A distinguisher is a probabilistic polynomial-time algorithm that output $1$ if he thinks that input function is truly random, $0$ otherwise} $D$:
+    \item{For all probabilistic polynomial-time distinguishers\footnote{A distinguisher is a probabilistic polynomial-time algorithm that output $1$ if he thinks that input function is truly random, $0$ otherwise.} $D$:
         $$
             |\mathsf{Pr}[D^{F_k}(n) = 1] - \mathsf{Pr}[D^{f_n}(n) = 1]| < \mathsf{negl}(n)
         $$
