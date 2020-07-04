@@ -25,7 +25,7 @@ In practice, hash functions are unkeyed or, rather, the key is included in the f
     As an example of use of hash functions, imagine that Alice wants to send a message $m$ to Bob and he wants to assure its integrity. After they both agree on the hash function to use, Alice sends $(m, \mathsf{H}(m))$, then upon receiving the pair, Bob itself calculates $\mathsf{H}(m)$ and verifies that it is the same it received from Alice. If they match, $m$ can be considered intact.\\
 While the domain of $\mathsf{H}$ is unlimited, its image it's not. For the pigeon-hole principle, this means that there are infinite pairs of different strings $x$ and $x'$ such that $\mathsf{H}(x) = \mathsf{H}(x')$, this is also known as a \emph{collision}.
 
-\subsection{Collision-resistant hash functions}\label{sec:collisionresistant}
+\subsection{Collision-Resistant Hash Functions}\label{sec:collisionresistant}
 Hash functions used in cryptography are also called collision-resistant hash functions, to emphasize the importance to have the property that no polynomial-time adversary can reverse them in a reasonable time.
 There are 3 levels of security:
 \begin{enumerate}

@@ -9,7 +9,7 @@ The decryption is carried out by applying to every block $F_k^{-1}$. Since the e
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{img/private-key/ecb.jpg}
-    \caption{ECB encryption.}
+    \caption[ECB encryption]{ECB encryption.}
 \end{figure}
 
 \subsection{Cipher Block Chaining}
@@ -18,7 +18,7 @@ First an initial vector IV of length n is chosen. Then, is set $c_0 = IV$ and fo
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{img/private-key/cbc.jpg}
-    \caption{CBC encryption.}
+    \caption[CBC encryption]{CBC encryption.}
 \end{figure}
 
 \subsection{Randomized Counter Mode}
@@ -27,7 +27,7 @@ As in CBC, an IV of length n is chosen. Then is computed $r_i := F_k((IV + i)\;\
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{img/private-key/ctr.jpg}
-    \caption{CTR encryption.}
+    \caption[CTR encryption]{CTR encryption.}
 \end{figure}
 
 \begin{figure}[h]

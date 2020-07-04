@@ -1,7 +1,7 @@
 % Nel caso volessi presentare DES, cambiare in Feistel Network. Bisognerà in
 % qualche modo introdurre le S-boxes
 \section{Substitution-Permutation Networks}
-\subsection{Confusion-diffusion}
+\subsection{Confusion-Diffusion}
 The confusion\=/diffusion paradigm has been introduced by Shannon for concise construction of pseudorandom functions. The idea is to break up the input into small parts, execute on them different random functions, mix the outputs together, and repeat the process for a finite amount of time. One cycle of this process is called \emph{round}, while the full construction is called \emph{network}.\\
 Shannon's original definitions are that confusion refers to making the relationship between the ciphertext and the key as complex as possible, diffusion refers to hiding the relationship between the ciphertext and the plaintext.
 Confusion achieves the fact that each bit of the ciphertext depends on several parts of the key. This means that, even if a single bit of the key is changed, most of the bits in the ciphertext will be affected.
